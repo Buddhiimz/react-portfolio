@@ -149,7 +149,8 @@ const TestComponent = () => {
           animate="animate"
           
           className="rounded-2xl border-4 border-neutral-800 p-4 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-gray-500">
-            <SiExpress className="text-4xl" style={{ color: '#F26D21' }} />
+    <SiExpress className="text-4xl" />
+
         </motion.div>
         
         <motion.div
