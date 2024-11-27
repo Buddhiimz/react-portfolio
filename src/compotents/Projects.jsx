@@ -6,7 +6,7 @@ import { motion, useScroll } from "framer-motion";
 const Projects = () => {
   const ref = useRef(null);
   const firstProjectRef = useRef(null);
-  const lastProjectRef = useRef(null); // Add reference for last project
+  const lastProjectRef = useRef(null);
   const [lineStart, setLineStart] = useState(0);
   const [lineEnd, setLineEnd] = useState(0);
   const { scrollYProgress } = useScroll({
@@ -14,17 +14,78 @@ const Projects = () => {
     offset: ["start start", "end end"],
   });
 
-  // Calculate both start and end positions of the timeline
-  useEffect(() => {
+  // Function to calculate and update line positions
+  const updateLinePositions = () => {
     if (firstProjectRef.current && lastProjectRef.current && ref.current) {
-      const containerTop = ref.current.getBoundingClientRect().top;
-      const firstDotTop = firstProjectRef.current.getBoundingClientRect().top;
-      const lastDotBottom = lastProjectRef.current.getBoundingClientRect().bottom;
+      const containerRect = ref.current.getBoundingClientRect();
+      const firstProjectRect = firstProjectRef.current.getBoundingClientRect();
+      const lastProjectRect = lastProjectRef.current.getBoundingClientRect();
 
-      // Adjust the length of the vertical line by changing the subtraction value (-50)
-      setLineStart(firstDotTop - containerTop + 110);
-      setLineEnd(lastDotBottom - firstDotTop - 445); // Increased subtraction value to decrease the line length
+      // Calculate relative positions
+      const start = firstProjectRect.top - containerRect.top + 110;
+      const end = lastProjectRect.bottom - firstProjectRect.top - 445;
+
+      setLineStart(start);
+      setLineEnd(Math.max(end, 100)); // Ensure minimum height
     }
+  };
+
+  useEffect(() => {
+    // Initial calculation with delay
+    const timeoutId = setTimeout(updateLinePositions, 500);
+
+    // Add resize listener
+    window.addEventListener('resize', updateLinePositions);
+
+    // Create intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          updateLinePositions();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    // Cleanup
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', updateLinePositions);
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  // Handle image loading
+  useEffect(() => {
+    const images = ref.current?.getElementsByTagName('img') || [];
+    let loadedImages = 0;
+
+    const handleImageLoad = () => {
+      loadedImages++;
+      if (loadedImages === images.length) {
+        updateLinePositions();
+      }
+    };
+
+    Array.from(images).forEach(img => {
+      if (img.complete) {
+        handleImageLoad();
+      } else {
+        img.addEventListener('load', handleImageLoad);
+      }
+    });
+
+    return () => {
+      Array.from(images).forEach(img => {
+        img.removeEventListener('load', handleImageLoad);
+      });
+    };
   }, []);
 
   return (
@@ -52,14 +113,15 @@ const Projects = () => {
 
       {/* Projects Container */}
       <div className="relative max-w-6xl mx-auto">
-        {/* Timeline line with fixed end point */}
+        {/* Timeline line */}
         <motion.div
           className="absolute left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-cyan-400 to-teal-400"
           style={{
             top: `${lineStart}px`,
-            height: `${lineEnd}px`, // Use calculated height instead of 100%
+            height: `${lineEnd}px`,
             scaleY: scrollYProgress,
             transformOrigin: "top",
+            opacity: lineEnd > 0 ? 1 : 0, // Only show line when height is calculated
           }}
         />
 
@@ -103,11 +165,11 @@ const Projects = () => {
                       transform: "scale(1)",
                     }}
                     whileHover={{
-                      scale: 1.05, // Slightly enlarge the card
-                      boxShadow: "0px 10px 30px rgba(14, 165, 233, 0.5)", // Add a glowing shadow
+                      scale: 1.05,
+                      boxShadow: "0px 10px 30px rgba(14, 165, 233, 0.5)",
                     }}
                     whileTap={{
-                      scale: 0.98, // Slightly reduce size when tapped
+                      scale: 0.98,
                     }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{
@@ -125,6 +187,7 @@ const Projects = () => {
                       className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400"
                     />
 
+                    {/* Project Image */}
                     <motion.img
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
@@ -135,6 +198,7 @@ const Projects = () => {
                       className="w-full h-45 object-cover rounded-lg mb-4 relative z-10"
                     />
 
+                    {/* Project Details */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -142,6 +206,7 @@ const Projects = () => {
                       transition={{ delay: 0.4 }}
                       className="relative z-10"
                     >
+                      {/* Project Title */}
                       <h6
                         className="text-lg font-semibold mb-2 text-white"
                         style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -149,6 +214,7 @@ const Projects = () => {
                         {project.title}
                       </h6>
 
+                      {/* Project Description */}
                       <p
                         className="text-neutral-400 mb-3 text-sm"
                         style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -156,6 +222,7 @@ const Projects = () => {
                         {project.description}
                       </p>
 
+                      {/* Technologies */}
                       <div className="flex flex-wrap gap-1.5 mb-3">
                         {project.technologies.map((tech, techIndex) => (
                           <motion.span
@@ -174,6 +241,7 @@ const Projects = () => {
                         ))}
                       </div>
 
+                      {/* GitHub Link */}
                       <motion.a
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
@@ -189,7 +257,6 @@ const Projects = () => {
                       </motion.a>
                     </motion.div>
                   </motion.div>
-
                 </div>
               </div>
             </motion.div>
