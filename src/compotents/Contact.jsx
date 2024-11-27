@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { Send, Phone, MapPin, Mail, Download } from 'lucide-react';
+import { Send, Phone, MapPin, Mail, Download, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { CONTACT } from '../constants';
 import BuddhimaCV from '../assets/BuddhimaCV.pdf';
 import emailjs from '@emailjs/browser';
 import { motion } from "framer-motion";
 
-// Initialize EmailJS (add this before the component)
+// Initialize EmailJS
 emailjs.init("-2plUivn1vfBwR-nT");
 
 const Contact = () => {
@@ -33,15 +33,14 @@ const Contact = () => {
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
-      // Add any other template parameters you need
     };
 
     try {
       await emailjs.send(
-        'service_7j552ii',  // Your EmailJS service ID
-        'template_50vvb16', // Your EmailJS template ID
-        templateParams,     // Your template parameters
-        '-2plUivn1vfBwR-nT' // Your EmailJS public key
+        'service_7j552ii',
+        'template_50vvb16',
+        templateParams,
+        '-2plUivn1vfBwR-nT'
       );
       
       setStatus({ type: 'success', message: 'Message sent successfully!' });
@@ -90,16 +89,35 @@ const Contact = () => {
     </div>
   );
 
+  const SocialLinks = () => (
+    <div className="mt-4"> {/* Changed from mt-8 to mt-4 */}
+      <div className="p-4 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
+        <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-sky-400 to-teal-400 bg-clip-text text-transparent">
+          Connect With Me
+        </h3>
+        
+        <div className="grid grid-cols-2 gap-4">
+          
+        </div>
+
+        <div className="mt-0 p-4 rounded-lg bg-gradient-to-r from-sky-900/50 to-teal-900/50">
+          <p className="text-sm text-center text-gray-200">
+            Feel free to reach out for collaborations or just to say Hi!
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-min py-12 px-4 font-[Poppins]">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-12">
-
           <motion.h1 
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: -50 }}
             transition={{ duration: 1 }}
-            className="text-3xl lg:text-4xl text-center font-bold  text-white" 
+            className="text-3xl lg:text-4xl text-center font-bold text-white" 
             style={{
               marginTop: "-10px",
               background: "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
@@ -110,13 +128,13 @@ const Contact = () => {
               Get In Touch
           </motion.h1>
 
-          <p className="text-center max-w-2xl mx-auto text-netraul-600">
+          <p className="text-center max-w-2xl mx-auto text-neutral-400">
             Have a question or want to work together? Drop me a message below.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12  text-white">
-          <div className="space-y-8">
+        <div className="grid md:grid-cols-2 gap-12 text-white">
+          <div className="space-y-4"> {/* Changed from space-y-8 to space-y-4 */}
             <div className="p-6 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
               <div className="space-y-6">
                 <ContactInfo 
@@ -144,8 +162,8 @@ const Contact = () => {
                   download
                 />
               </div>
-              
             </div>
+            <SocialLinks />
           </div>
 
           <div className="p-8 rounded-xl border border-gray-700">
@@ -201,7 +219,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={status.type === 'loading'}
-                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 text-white py-3 px-6 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-sky-700 via-cyan-700 to-teal-500 text-white py-3 px-6 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>{status.type === 'loading' ? 'Sending...' : 'Send Message'}</span>
                 <Send className="w-4 h-4" />
