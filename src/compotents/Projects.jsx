@@ -23,7 +23,7 @@ const Projects = () => {
 
       // Adjust the length of the vertical line by changing the subtraction value (-50)
       setLineStart(firstDotTop - containerTop + 110);
-      setLineEnd(lastDotBottom - firstDotTop - 440); // Increased subtraction value to decrease the line length
+      setLineEnd(lastDotBottom - firstDotTop - 445); // Increased subtraction value to decrease the line length
     }
   }, []);
 
