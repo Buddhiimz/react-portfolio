@@ -44,11 +44,17 @@ const TestComponent = () => {
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -50 }}
         transition={{ duration: 1 }}
-        className="text-3xl lg:text-4xl text-center mb-12 mt-10 font-bold font-['Poppins']">
+        className="text-3xl lg:text-4xl text-center mb-3 mt-10 font-bold font-['Poppins']">
         <span className="text-transparent bg-clip-text bg-gradient-to-r  from-sky-500 via-cyan-500 to-teal-500">
           Technologies
         </span>
       </motion.h1>
+
+      <div className="font-[Poppins] text-netraul-600 mb-10">
+        <p className="text-center max-w-2xl mx-auto">
+        Discover the powerful Tools and Technologies I used to create high-performing websites & mobile Applications.
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto px-4">
         {technologies.map((tech, index) => (

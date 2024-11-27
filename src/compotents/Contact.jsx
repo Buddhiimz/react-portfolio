@@ -91,7 +91,7 @@ const Contact = () => {
   );
 
   return (
-    <div className="min-h-min py-12 px-4 font-[Poppins] text-white">
+    <div className="min-h-min py-12 px-4 font-[Poppins]">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-12">
 
@@ -99,7 +99,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: -50 }}
             transition={{ duration: 1 }}
-            className="text-3xl lg:text-4xl text-center font-bold" 
+            className="text-3xl lg:text-4xl text-center font-bold  text-white" 
             style={{
               marginTop: "-10px",
               background: "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
@@ -110,12 +110,12 @@ const Contact = () => {
               Get In Touch
           </motion.h1>
 
-          <p className="text-center max-w-2xl mx-auto">
+          <p className="text-center max-w-2xl mx-auto text-netraul-600">
             Have a question or want to work together? Drop me a message below.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-12  text-white">
           <div className="space-y-8">
             <div className="p-6 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
               <div className="space-y-6">
@@ -144,6 +144,7 @@ const Contact = () => {
                   download
                 />
               </div>
+              
             </div>
           </div>
 

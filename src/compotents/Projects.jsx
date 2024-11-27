@@ -192,7 +192,7 @@ const Projects = () => {
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.3 }}
+                      transition={{ delay: 0.2 }}
                       src={project.image}
                       alt={project.title || "Project Image"}
                       className="w-full h-45 object-cover rounded-lg mb-4 relative z-10"
@@ -203,7 +203,7 @@ const Projects = () => {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.4 }}
+                      transition={{ delay: 0.2 }}
                       className="relative z-10"
                     >
                       {/* Project Title */}
@@ -231,7 +231,7 @@ const Projects = () => {
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{
-                              delay: 0.5 + techIndex * 0.1,
+                              delay: 0.3 + techIndex * 0.1,
                             }}
                             className="px-2 py-0.5 rounded-full text-white border border-gray-600 rounded-lg p-4"
                             style={{ fontFamily: "'Poppins', sans-serif", fontSize: "13px" }}
@@ -246,7 +246,7 @@ const Projects = () => {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.6 }}
+                        transition={{ delay: 0.4 }}
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
