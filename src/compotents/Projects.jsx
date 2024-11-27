@@ -133,7 +133,7 @@ const Projects = () => {
           return (
             <motion.div
               key={index}
-              className="mb-30"
+              className="mb-[35px]"
               ref={index === 0 ? firstProjectRef : isLast ? lastProjectRef : null}
             >
               <div
