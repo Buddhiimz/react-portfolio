@@ -1,36 +1,226 @@
-import React from 'react'
-import { CONTACT } from '../constants'
-import { motion } from "framer-motion"
+import React, { useRef, useState } from 'react';
+import { Send, Phone, MapPin, Mail, Download } from 'lucide-react';
+import { CONTACT } from '../constants';
+import BuddhimaCV from '../assets/BuddhimaCV.pdf';
+import emailjs from '@emailjs/browser';
+import { motion } from "framer-motion";
+
+// Initialize EmailJS (add this before the component)
+emailjs.init("-2plUivn1vfBwR-nT");
 
 const Contact = () => {
-  return (
-    <div className="border-b border-neutral-800 pb-8 ">
-      <motion.h1
-       whileInView={{ opacity: 1, y: 0 }}
-       initial={{ opacity: 0, y: -50 }}
-       transition={{ duration: 1 }}
-      className="text-4xl lg:text-4xl tracking-tight text-center my-10" style={{ marginTop: "40px" }}>
-        <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
-          Get In Touch
-        </span> 
-      </motion.h1>
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const form = useRef(null);
 
-      <div className="text-center tracking-tighter">
-        <motion.p 
-        whileInView={{ opacity: 1, x: 0 }}
-        initial={{ opacity: 0, x: -100 }}
-        transition={{ duration: 1 }}
-        className="my-4">{CONTACT.address}</motion.p>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-        <motion.p 
-        whileInView={{ opacity: 1, x: 0 }}
-        initial={{ opacity: 0, x: 100 }}
-        transition={{ duration: 1 }}
-        className="my-4">{CONTACT.phoneNo}</motion.p>
-        <a href={`mailto:${CONTACT.email}`} className="border-b">{CONTACT.email}</a>
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    setStatus({ type: 'loading', message: 'Sending...' });
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+      // Add any other template parameters you need
+    };
+
+    try {
+      await emailjs.send(
+        'service_7j552ii',  // Your EmailJS service ID
+        'template_50vvb16', // Your EmailJS template ID
+        templateParams,     // Your template parameters
+        '-2plUivn1vfBwR-nT' // Your EmailJS public key
+      );
+      
+      setStatus({ type: 'success', message: 'Message sent successfully!' });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Email error:', error);
+      setStatus({ 
+        type: 'error', 
+        message: 'Failed to send message. Please try again.' 
+      });
+    }
+  };
+
+  const ContactInfo = ({ icon: Icon, title, value, href, download }) => (
+    <div className="flex items-center space-x-4">
+      <div className={`p-3 ${
+        title === 'Address' ? 'bg-sky-900/50' :
+        title === 'Phone' ? 'bg-cyan-900/50' :
+        title === 'Email' ? 'bg-teal-900/50' :
+        'bg-emerald-900/50'
+      } rounded-lg`}>
+        {href ? (
+          <a
+            href={href}
+            download={download}
+            className={`hover:text-${
+              title === 'Phone' ? 'cyan' :
+              title === 'Email' ? 'teal' :
+              'emerald'
+            }-400 transition-colors`}
+          >
+            <Icon className={`w-6 h-6 text-${
+              title === 'Phone' ? 'cyan' :
+              title === 'Email' ? 'teal' :
+              'emerald'
+            }-400 cursor-pointer`} />
+          </a>
+        ) : (
+          <Icon className="w-6 h-6 text-sky-400" />
+        )}
+      </div>
+      <div>
+        <h3 className="font-semibold">{title}</h3>
+        <span className="opacity-80">{value}</span>
       </div>
     </div>
-  )
-}
+  );
 
-export default Contact
+  return (
+    <div className="min-h-min py-12 px-4 font-[Poppins] text-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="space-y-4 mb-12">
+
+          <motion.h1 
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: -50 }}
+            transition={{ duration: 1 }}
+            className="text-3xl lg:text-4xl text-center font-bold" 
+            style={{
+              marginTop: "-10px",
+              background: "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent"
+            }}>
+              Get In Touch
+          </motion.h1>
+
+          <p className="text-center max-w-2xl mx-auto">
+            Have a question or want to work together? Drop me a message below.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          <div className="space-y-8">
+            <div className="p-6 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
+              <div className="space-y-6">
+                <ContactInfo 
+                  icon={MapPin} 
+                  title="Address" 
+                  value={CONTACT.address} 
+                />
+                <ContactInfo 
+                  icon={Phone} 
+                  title="Phone" 
+                  value={CONTACT.phoneNo}
+                  href={`tel:${CONTACT.phoneNo}`}
+                />
+                <ContactInfo 
+                  icon={Mail} 
+                  title="Email" 
+                  value={CONTACT.email}
+                  href={`mailto:${CONTACT.email}`}
+                />
+                <ContactInfo 
+                  icon={Download} 
+                  title="Resume" 
+                  value="Download CV"
+                  href={BuddhimaCV}
+                  download
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="p-8 rounded-xl border border-gray-700">
+            <form ref={form} onSubmit={sendEmail} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-m font-medium mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-m font-medium mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-m font-medium mb-1">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                  placeholder="Your message"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status.type === 'loading'}
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 text-white py-3 px-6 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>{status.type === 'loading' ? 'Sending...' : 'Send Message'}</span>
+                <Send className="w-4 h-4" />
+              </button>
+
+              {status.message && (
+                <div className={`text-center p-2 rounded ${
+                  status.type === 'success' ? 'text-green-400' : 
+                  status.type === 'error' ? 'text-red-400' : 
+                  'text-blue-400'
+                }`}>
+                  {status.message}
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Contact;
