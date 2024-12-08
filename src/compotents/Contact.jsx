@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Send, Phone, MapPin, Mail, Download, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import { Send, Phone, MapPin, Mail, Download} from 'lucide-react';
 import { CONTACT } from '../constants';
 import BuddhimaCV from '../assets/BuddhimaCV.pdf';
 import emailjs from '@emailjs/browser';
