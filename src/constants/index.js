@@ -82,5 +82,5 @@ export const PROJECTS = [
 export const CONTACT = {
   address: "Plot.12, Prime Princess, Hawpigewatta, Poddala, Galle, Sri Lanka",
   phoneNo: "+94 76 5831021 ",
-  email: "buddhimma@gmail.com",
+  email: "buddhima.v.dev@gmail.com",
 };
