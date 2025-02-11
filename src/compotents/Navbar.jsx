@@ -1,76 +1,139 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-const Navbar = ({ homeRef, aboutMeRef, techRef, projectRef, contactsRef }) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const navItems = [
+    { name: "Home", path: "home" },
+    { name: "About Me", path: "about-me" },
+    { name: "Technologies", path: "tech" },
+    { name: "Projects", path: "project" },
+    { name: "Services", path: "services" },
+  ];
 
-  const scrollToRef = (ref) => {
-    window.scrollTo({
-      top: ref.current.offsetTop,
-      behavior: 'smooth',
-    });
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 110, // Adjust this value to your preference
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
-    <nav className="mb-20 flex items-center justify-between py-6 lg:px-8 px-4">
-      <div className="flex-shrink-0 flex items-center lg:ml-28 ml-4">
-        <img src={logo} alt="logo" className="w-24 h-auto" />
-      </div>
-      <div className="hidden lg:flex items-center justify-center gap-4 lg:mr-40 mr-4 text-2xl leading-6">
-        <ul className="flex space-x-8">
-          <li>
-            <button onClick={() => scrollToRef(homeRef)} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Home</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToRef(aboutMeRef)} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">About Me</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToRef(techRef)} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Technologies</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToRef(projectRef)} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Projects</button>
-          </li>
-          <li>
-            <button onClick={() => scrollToRef(contactsRef)} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Contacts</button>
-          </li>
-        </ul>
-      </div>
-      <div className="lg:hidden flex items-center">
-        <button onClick={toggleMenu} className="text-gray-500 focus:outline-none">
+    <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-5 md:px-8 lg:px-32 font-poppins">
+      <header className="relative flex items-center p-3 transition-all duration-300 ease-in-out border-[1.7px] border-solid border-gray-500/15 backdrop-blur-md rounded-2xl bg-white/5">
+        {/* Logo */}
+        <div className="flex items-center flex-shrink-0">
+          <Link
+            to="#"
+            className="transition-opacity duration-300 hover:opacity-80"
+            onClick={() => {
+              if (window.location.pathname !== "/") {
+                navigate("/");
+                setTimeout(() => {
+                  const element = document.getElementById("home");
+                  if (element) element.scrollIntoView({ behavior: "smooth" });
+                }, 100);
+              } else {
+                const element = document.getElementById("home");
+                if (element) element.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            <img src={logo} alt="Logo" className="w-[200px]" />
+          </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="flex-grow hidden p-2 px-4 xl:flex">
+          <ul className="flex items-center justify-center flex-grow space-x-8 lg:space-x-12">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => {
+                  if (window.location.pathname !== "/") {
+                    navigate("/");
+                    setTimeout(() => {
+                      scrollToSection(item.path);
+                    }, 100);
+                  } else {
+                    scrollToSection(item.path);
+                  }
+                }}
+                className="text-white hover:text-gray-300 transition-all duration-300"
+              >
+                {item.name}
+              </button>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Desktop Contact Button */}
+        <button
+          className="hidden xl:block text-white no-underline"
+          onClick={() => scrollToSection("contact")}
+        >
+          <button
+            className="px-5 py-3 text-white transition-all duration-300 rounded-xl bg-white/15 backdrop-blur-md hover:bg-white/20"
+          >
+            Contact Me
+          </button>
+        </button>
+
+        {/* Menu Button */}
+        <button
+          className="p-2 ml-auto text-white transition-transform duration-300 xl:hidden hover:scale-110"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        >
           {isMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
+            <X size={24} className="transition-transform duration-300 transform rotate-0 hover:rotate-90" />
           ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
+            <Menu size={24} className="transition-transform duration-300 transform rotate-0 hover:-rotate-90" />
           )}
         </button>
-      </div>
-      {isMenuOpen && (
-        <div className="lg:hidden flex flex-col items-center gap-4 mt-4">
-          <ul className="flex flex-col space-y-4">
-            <li>
-              <button onClick={() => { toggleMenu(); scrollToRef(aboutMeRef); }} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">About Me</button>
-            </li>
-            <li>
-              <button onClick={() => { toggleMenu(); scrollToRef(techRef); }} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Technologies</button>
-            </li>
-            <li>
-              <button onClick={() => { toggleMenu(); scrollToRef(projectRef); }} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Projects</button>
-            </li>
-            <li>
-              <button onClick={() => { toggleMenu(); scrollToRef(contactsRef); }} className="text-lg font-medium text-gray-500 hover:text-gray-300 cursor-pointer">Contacts</button>
-            </li>
-          </ul>
+
+        {/* Mobile/Tablet Navigation Menu */}
+        <div
+          className={`absolute left-0 right-0 z-50 p-4 mt-2 space-y-2 rounded-lg shadow-lg top-full bg-gray-900/95 backdrop-blur-md transform transition-all duration-300 ease-in-out xl:hidden ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}
+        >
+          {navItems.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => {
+                if (window.location.pathname !== "/") {
+                  navigate("/");
+                  setTimeout(() => {
+                    scrollToSection(item.path);
+                  }, 100);
+                } else {
+                  scrollToSection(item.path);
+                }
+                setIsMenuOpen(false);
+              }}
+              className="block w-full px-4 py-2 text-white transition-all duration-300 rounded-lg hover:bg-white/10 hover:translate-x-2"
+            >
+              {item.name}
+            </button>
+          ))}
+          <button
+            className="w-full px-4 py-2 mt-2 text-white transition-all duration-300 rounded-lg bg-white/15 hover:bg-white/20 hover:scale-102"
+            onClick={() => {
+              setIsMenuOpen(false);
+              scrollToSection("contact"); // Scroll to contact section on mobile
+            }}
+          >
+            Contact Me
+          </button>
         </div>
-      )}
-    </nav>
+      </header>
+    </div>
   );
 };
 

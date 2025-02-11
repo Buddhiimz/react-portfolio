@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { HERO_CONTENT } from '../constants/index.js';
-import ProfilePic2 from '../assets/Profile2.png';
+import React, { useState, useEffect } from "react";
+import { HERO_CONTENT } from "../constants/index.js";
+import ProfilePic2 from "../assets/Profile2.png";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaInstagram, FaFacebookSquare } from "react-icons/fa";
-import { RiTwitterXFill } from 'react-icons/ri';
+import { RiTwitterXFill } from "react-icons/ri";
 
 const container = (delay) => ({
   hidden: { x: -200, opacity: 0 },
   visible: { x: 1, opacity: 1, transition: { duration: 0.5, delay: delay } },
 });
 
-const roles = ["Software Engineer", "Full Stack Developer", "Mobile Application Developer", "UI/UX Developer"];
+const roles = [
+  "Software Engineer",
+  "Full Stack Developer",
+  "Mobile Application Developer",
+  "UI/UX Developer",
+];
 
 const Typewriter = () => {
   const [text, setText] = useState("");
@@ -70,14 +75,8 @@ const Typewriter = () => {
           }
         `}
       </style>
-      <motion.div
-        variants={container(0.2)}
-        initial="hidden"
-        animate="visible"
-      >
-        <span style={containerStyle}>
-          I'm a {text}
-        </span>
+      <motion.div variants={container(0.2)} initial="hidden" animate="visible">
+        <span style={containerStyle}>I'm a {text}</span>
         <span style={cursorStyle}>|</span>
       </motion.div>
     </div>
@@ -86,18 +85,26 @@ const Typewriter = () => {
 
 const Hero = () => {
   return (
-    <div className="relative px-4 lg:px-0">
-      <div className="flex flex-col-reverse lg:flex-row flex-wrap">
-
+    <div
+      id="home"
+      className="relative px-4 lg:px-0 max-w-screen overflow-hidden"
+    >
+      <div
+        className="flex flex-col-reverse lg:flex-row flex-wrap"
+        style={{ marginTop: "150px" }}
+      >
         {/* Content Section */}
         <div className="w-full lg:w-3/5 mb-8 lg:mb-0">
-          <div className="flex flex-col items-center lg:items-start lg:ml-28" 
-               style={{ fontFamily: "'Poppins', sans-serif"}}>
+          <div
+            className="flex flex-col items-center lg:items-start lg:ml-28"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
             <motion.h1
               variants={container(0)}
               initial="hidden"
               animate="visible"
-              className="pb-4 text-5xl lg:text-6xl font-bold tracking-tight text-white text-center lg:text-left">
+              className="pb-4 text-5xl lg:text-6xl font-bold tracking-tight text-white text-center lg:text-left"
+            >
               Buddhima Vilochana
             </motion.h1>
 
@@ -107,7 +114,8 @@ const Hero = () => {
               variants={container(0.4)}
               initial="hidden"
               animate="visible"
-              className="my-2 max-w-xl py-4 text-base lg:text-lg text-center lg:text-left">
+              className="my-2 max-w-xl py-4 text-base lg:text-lg text-center lg:text-left"
+            >
               {HERO_CONTENT}
             </motion.p>
 
@@ -115,8 +123,12 @@ const Hero = () => {
               variants={container(0.6)}
               initial="hidden"
               animate="visible"
-              className="flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 border border-gray-600 rounded-lg p-4">
-              <a href="https://www.linkedin.com/in/buddhima-vilochana-47251328a" className="group">
+              className="flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 border border-gray-600 rounded-lg p-4"
+            >
+              <a
+                href="https://www.linkedin.com/in/buddhima-vilochana-47251328a"
+                className="group"
+              >
                 <FaLinkedin className="text-3xl lg:text-4xl text-blue-600 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
               </a>
               <a href="https://github.com/Buddhiimz" className="group">
@@ -145,14 +157,12 @@ const Hero = () => {
             alt="Buddhima"
             className="w-full max-w-sm lg:max-w-full rounded-lg"
             style={{
-              marginTop: "-110px",  
-              //marginLeft: "-40px"  ,
+              marginTop: "-110px",
               borderRadius: "15px",
-              maxWidth: "95%" 
+              maxWidth: "95%",
             }}
           />
         </div>
-
       </div>
     </div>
   );

@@ -4,14 +4,14 @@ import Profile from '../assets/Profile.jpg';
 
 const About = () => {
   return (
-    <div className="pb-16 w-6/7 mt-28">
+    <div id="about-me"
+    className="w-full px-4 sm:px-6 md:px-8 mt-24">
       <motion.h1
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -50 }}
         transition={{ duration: 1 }}
-        className="text-3xl lg:text-4xl text-center"
+        className="text-3xl lg:text-4xl text-center -mt-14"
         style={{
-          marginTop: "-56px",
           fontFamily: "'Poppins', sans-serif",
           fontWeight: "bold"}}>
         <span
@@ -22,14 +22,14 @@ const About = () => {
           About Me</span>
       </motion.h1>
 
-      <div className="flex flex-wrap" style={{ marginTop: "40px" }}>
+      <div className="flex flex-wrap mt-6">
         <motion.div 
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.5 }}
-          className="w-full lg:w-2/5 flex justify-end items-end p-4">
+          className="w-full lg:w-2/5 flex justify-center lg:justify-end items-center p-4">
           
-          <div className="relative" style={{ width: '400px', height: '500px' }}>
+          <div className="relative w-[300px] h-[400px] sm:w-[400px] sm:h-[500px]">
             <div className="border-segment-container" style={{
               position: 'absolute',
               top: '-20px',
@@ -124,7 +124,7 @@ const About = () => {
             <img 
               src={Profile} 
               alt="Profile"
-              className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform mx-auto lg:mx-0" 
+              className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform mx-auto" 
               style={{ 
                 borderRadius: "15px",
                 objectFit: "cover",
@@ -139,30 +139,35 @@ const About = () => {
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.5 }}
-          className="w-full lg:w-3/5 lg:pl-16 lg:pt-2 p-4 ">
-          {/* Rest of your existing content */}
-          <p className="text-center lg:text-left text-sm lg:text-base block w-full lg:w-11/12 text-justify p-5"
-            style={{ fontFamily: "'Poppins', sans-serif" }}>
-            I am Buddhima Vilochana, a Software Engineering undergraduate at SLIIT, passionate about technology and innovation. Proficient in full-stack development, mobile apps, and databases, I create scalable, user-focused solutions using tools like React, Node.js, Flutter, and MongoDB. My portfolio includes projects like MediCare, FieldExpert, and OceanicCare, showcasing my ability to solve real-world problems. I am eager to integrate AI/ML into my work and continuously explore new technologies to drive innovation.
+          className="w-full lg:w-3/5 p-4 lg:pl-16 lg:pt-2">
+          <p className="text-left text-sm lg:text-base lg:w-11/12 p-4 lg:p-5 leading-relaxed"
+             style={{ fontFamily: "'Poppins', sans-serif" }}>
+            I am Buddhima Vilochana, a Software Engineering undergraduate at SLIIT, 
+            passionate about technology and innovation. Proficient in full-stack 
+            development, mobile apps, and databases, I create scalable, user-focused 
+            solutions using tools like React, Node.js, Flutter, and MongoDB. My portfolio 
+            includes projects like MediCare, FieldExpert, and OceanicCare, showcasing my 
+            ability to solve real-world problems. I am eager to integrate AI/ML into my 
+            work and continuously explore new technologies to drive innovation.
           </p>
-          
-          <div className="w-4/5 h-px bg-gray-700 mx-auto lg:mx-4 my-4"></div>
+
+          <div className="w-4/5 h-px bg-gray-700 mx-auto lg:mx-4 my-6"></div>
           
           <motion.div
             whileInView={{ opacity: 1, x: 0 }}
             initial={{ opacity: 0, x: 100 }}
             transition={{ duration: 1 }}
-            className="lg:w-5/6 p-4">
+            className="p-4 lg:w-5/6">
             
-            <h2 className="text-xl font-semibold mb-2" style={{ fontFamily: "'Poppins', sans-serif" }}>Education</h2>
+            <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: "'Poppins', sans-serif" }}>Education</h2>
             
-            <div className="mb-2">
+            <div className="mb-6">
               <h3 className="text-lg font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 Sri Lanka Institute of Information Technology
               </h3>
-              <p className="text-sm text-gray-300">BSc (Hons) in Information Technology</p>
+              <p className="text-sm text-gray-300 mt-1">BSc (Hons) in Information Technology</p>
               <p className="text-sm text-gray-300">Specializing in Software Engineering</p>
-              <p className="text-sm text-gray-400">Expected Graduation: Oct 2026</p>
+              <p className="text-sm text-gray-400 mt-1">Expected Graduation: Oct 2026</p>
               <p className="text-sm text-gray-400">CGPA: 2.81</p>
             </div>
 
@@ -170,9 +175,9 @@ const About = () => {
               <h3 className="text-lg font-medium" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 ST Aloysius' College, Galle
               </h3>
-              <p className="text-sm text-gray-300">GCE Advanced Level</p>
+              <p className="text-sm text-gray-300 mt-1">GCE Advanced Level</p>
               <p className="text-sm text-gray-300">Physical Science Stream</p>
-              <p className="text-sm text-gray-400">2018 - 2021</p>
+              <p className="text-sm text-gray-400 mt-1">2018 - 2021</p>
             </div>
           </motion.div>
         </motion.div>

@@ -89,13 +89,14 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="pb-8 mt-10" ref={ref}>
+    <div id="project"
+    className="pb-4 mt-6 px-4 sm:px-6 md:px-8" ref={ref}>
       {/* Title */}
       <motion.h1
         whileInView={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: -50 }}
         transition={{ duration: 1 }}
-        className="text-3xl lg:text-4xl text-center mb-16 font-bold"
+        className="text-3xl lg:text-4xl text-center mb-8 font-bold"
         style={{
           fontFamily: "'Poppins', sans-serif",
         }}
@@ -121,7 +122,7 @@ const Projects = () => {
             height: `${lineEnd}px`,
             scaleY: scrollYProgress,
             transformOrigin: "top",
-            opacity: lineEnd > 0 ? 1 : 0, // Only show line when height is calculated
+            opacity: lineEnd > 0 ? 1 : 0,
           }}
         />
 
@@ -133,7 +134,7 @@ const Projects = () => {
           return (
             <motion.div
               key={index}
-              className="mb-[35px]"
+              className="mb-[35px] px-4 sm:px-0"
               ref={index === 0 ? firstProjectRef : isLast ? lastProjectRef : null}
             >
               <div
@@ -176,7 +177,7 @@ const Projects = () => {
                       duration: 0.8,
                       ease: "easeOut",
                     }}
-                    className="bg-neutral-900/50 p-6 rounded-lg backdrop-blur-sm border border-neutral-800 relative overflow-hidden"
+                    className="bg-neutral-900/50 p-4 sm:p-6 rounded-lg backdrop-blur-sm border border-neutral-800 relative overflow-hidden"
                   >
                     {/* Highlight overlay */}
                     <motion.div

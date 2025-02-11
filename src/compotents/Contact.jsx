@@ -90,7 +90,8 @@ const Contact = () => {
   );
 
   const SocialLinks = () => (
-    <div className="mt-4"> {/* Changed from mt-8 to mt-4 */}
+    <div id="contact"
+    className="mt-4"> {/* Changed from mt-8 to mt-4 */}
       <div className="p-4 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
         <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-sky-400 to-teal-400 bg-clip-text text-transparent">
           Connect With Me
@@ -110,7 +111,8 @@ const Contact = () => {
   );
 
   return (
-    <div className="min-h-min py-12 px-4 font-[Poppins]">
+    <div
+    className="min-h-min py-12 px-4 font-[Poppins]">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-12">
           <motion.h1 

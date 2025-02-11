@@ -67,13 +67,14 @@ const ServicesGrid = () => {
   ];   
 
   return (
-    <div className="p-8">
+    <div id="servicers"
+    className="px-8">
       <div className="max-w-6xl mx-auto">
         <motion.h1
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -50 }}
           transition={{ duration: 1 }}
-          className="text-3xl lg:text-4xl text-center mb-10 font-bold"
+          className="text-3xl lg:text-4xl text-center mb-8 font-bold"
           style={{
             fontFamily: "'Poppins', sans-serif",
           }}
