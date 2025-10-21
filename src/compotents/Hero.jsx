@@ -119,34 +119,21 @@ const Hero = () => {
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
                 <motion.h1
-  variants={container2}
-  initial="hidden"
-  animate="visible"
-  className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left"
->
-  {name.split("").map((char, index) => (
-    <motion.span
-      key={index}
-      variants={letter}
-      animate={{
-        x: [0, Math.random() * 2 - 1, 0], // slight random left-right shake
-        y: [0, Math.random() * 2 - 1, 0], // slight random up-down shake
-        rotate: [0, Math.random() * 2 - 1, 0], // tiny rotation
-      }}
-      transition={{
-        repeat: Infinity,
-        repeatType: "mirror",
-        duration: 0.4 + Math.random() * 0.6, // each letter unique timing
-        delay: 1 + Math.random() * 1.5, // starts after name loads
-        ease: "easeInOut",
-      }}
-      className="mr-0.5 inline-block"
-    >
-      {char === " " ? "\u00A0" : char}
-    </motion.span>
-  ))}
-</motion.h1>
-
+                  variants={container2}
+                  initial="hidden"
+                  animate="visible"
+                  className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left"
+                >
+                  {name.split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      variants={letter}
+                      className="mr-0.5" // adds space between letters
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </motion.span>
+                  ))}
+                </motion.h1>
 
             <Typewriter />
 
