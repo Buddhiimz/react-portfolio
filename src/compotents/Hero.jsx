@@ -5,6 +5,25 @@ import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaInstagram, FaFacebookSquare } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 
+
+const name = "Buddhima Vilochana";
+
+// Variants for container to stagger children
+const container2 = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05, // delay between letters
+    },
+  },
+};
+
+// Variants for each letter
+const letter = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 12, stiffness: 100 } },
+};
+
 const container = (delay) => ({
   hidden: { x: -200, opacity: 0 },
   visible: { x: 1, opacity: 1, transition: { duration: 0.5, delay: delay } },
@@ -99,14 +118,35 @@ const Hero = () => {
             className="flex flex-col items-center lg:items-start lg:ml-28"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            <motion.h1
-              variants={container(0)}
-              initial="hidden"
-              animate="visible"
-              className="pb-4 text-5xl lg:text-6xl font-bold tracking-tight text-white text-center lg:text-left"
-            >
-              Buddhima Vilochana
-            </motion.h1>
+                <motion.h1
+  variants={container2}
+  initial="hidden"
+  animate="visible"
+  className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left"
+>
+  {name.split("").map((char, index) => (
+    <motion.span
+      key={index}
+      variants={letter}
+      animate={{
+        x: [0, Math.random() * 2 - 1, 0], // slight random left-right shake
+        y: [0, Math.random() * 2 - 1, 0], // slight random up-down shake
+        rotate: [0, Math.random() * 2 - 1, 0], // tiny rotation
+      }}
+      transition={{
+        repeat: Infinity,
+        repeatType: "mirror",
+        duration: 0.4 + Math.random() * 0.6, // each letter unique timing
+        delay: 1 + Math.random() * 1.5, // starts after name loads
+        ease: "easeInOut",
+      }}
+      className="mr-0.5 inline-block"
+    >
+      {char === " " ? "\u00A0" : char}
+    </motion.span>
+  ))}
+</motion.h1>
+
 
             <Typewriter />
 
@@ -123,24 +163,50 @@ const Hero = () => {
               variants={container(0.6)}
               initial="hidden"
               animate="visible"
-              className="flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 border border-gray-600 rounded-lg p-4"
+              className="relative flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 rounded-lg p-4"
+              style={{
+                border: '2px solid rgba(221, 132, 72, 0.6)',
+                boxShadow: '0 0 20px rgba(221, 132, 72, 0.3), inset 0 0 20px rgba(221, 132, 72, 0.1)',
+              }}
             >
+              {/* Electric effect overlays */}
+              <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(221, 132, 72, 0.4), transparent)',
+                    animation: 'electric-flow 3s linear infinite',
+                  }}
+                />
+              </div>
+              <style>
+                {`
+                  @keyframes electric-flow {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                  }
+                  @keyframes pulse-glow {
+                    0%, 100% { opacity: 0.6; }
+                    50% { opacity: 1; }
+                  }
+                `}
+              </style>
               <a
                 href="https://www.linkedin.com/in/buddhima-vilochana-47251328a"
-                className="group"
+                className="group relative z-10"
               >
                 <FaLinkedin className="text-3xl lg:text-4xl text-blue-600 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
               </a>
-              <a href="https://github.com/Buddhiimz" className="group">
+              <a href="https://github.com/Buddhiimz" className="group relative z-10">
                 <FaGithub className="text-3xl lg:text-4xl transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-purple-500" />
               </a>
-              <a href="https://instagram.com/buddhimxx" className="group">
+              <a href="https://instagram.com/buddhimxx" className="group relative z-10">
                 <FaInstagram className="text-3xl lg:text-4xl text-pink-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-red-500" />
               </a>
-              <a href="https://fb.com/ag buddhima" className="group">
+              <a href="https://fb.com/ag buddhima" className="group relative z-10">
                 <FaFacebookSquare className="text-3xl lg:text-4xl text-blue-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
               </a>
-              <a href="#" className="group">
+              <a href="#" className="group relative z-10">
                 <RiTwitterXFill className="text-3xl lg:text-4xl text-white-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-gray-500" />
               </a>
             </motion.div>
@@ -157,9 +223,10 @@ const Hero = () => {
             alt="Buddhima"
             className="w-full max-w-sm lg:max-w-full rounded-lg"
             style={{
-              marginTop: "-110px",
+              marginRight: "110px",
+              marginTop: "-100px",
               borderRadius: "15px",
-              maxWidth: "95%",
+              maxWidth: "100%",
             }}
           />
         </div>
