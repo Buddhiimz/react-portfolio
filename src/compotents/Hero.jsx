@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { HERO_CONTENT } from "../constants/index.js";
 import ProfilePic2 from "../assets/Profile2.png";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaInstagram, FaFacebookSquare } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaInstagram,
+  FaFacebookSquare,
+} from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
-
 
 const name = "Buddhima Vilochana";
 
@@ -21,7 +25,11 @@ const container2 = {
 // Variants for each letter
 const letter = {
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 12, stiffness: 100 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", damping: 12, stiffness: 100 },
+  },
 };
 
 const container = (delay) => ({
@@ -118,22 +126,27 @@ const Hero = () => {
             className="flex flex-col items-center lg:items-start lg:ml-28"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-                <motion.h1
-                  variants={container2}
-                  initial="hidden"
-                  animate="visible"
-                  className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left"
-                >
-                  {name.split("").map((char, index) => (
-                    <motion.span
-                      key={index}
-                      variants={letter}
-                      className="mr-0.5" // adds space between letters
-                    >
-                      {char === " " ? "\u00A0" : char}
-                    </motion.span>
-                  ))}
-                </motion.h1>
+            <motion.h1
+              variants={container2}
+              initial="hidden"
+              animate="visible"
+              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left"
+            >
+              {name.split("").map((char, index) => (
+                <motion.span key={index} variants={letter} className="mr-0.5">
+                  {char === " " ? (
+                    <>
+                      {/* Hide line break on large screens */}
+                      <span className="hidden lg:inline">&nbsp;</span>
+                      {/* Show line break on mobile */}
+                      <br className="lg:hidden" />
+                    </>
+                  ) : (
+                    char
+                  )}
+                </motion.span>
+              ))}
+            </motion.h1>
 
             <Typewriter />
 
@@ -152,17 +165,19 @@ const Hero = () => {
               animate="visible"
               className="relative flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 rounded-lg p-4"
               style={{
-                border: '2px solid rgba(221, 132, 72, 0.6)',
-                boxShadow: '0 0 20px rgba(221, 132, 72, 0.3), inset 0 0 20px rgba(221, 132, 72, 0.1)',
+                border: "2px solid rgba(221, 132, 72, 0.6)",
+                boxShadow:
+                  "0 0 20px rgba(221, 132, 72, 0.3), inset 0 0 20px rgba(221, 132, 72, 0.1)",
               }}
             >
               {/* Electric effect overlays */}
               <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
-                <div 
+                <div
                   className="absolute inset-0"
                   style={{
-                    background: 'linear-gradient(90deg, transparent, rgba(221, 132, 72, 0.4), transparent)',
-                    animation: 'electric-flow 3s linear infinite',
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(221, 132, 72, 0.4), transparent)",
+                    animation: "electric-flow 3s linear infinite",
                   }}
                 />
               </div>
@@ -184,13 +199,22 @@ const Hero = () => {
               >
                 <FaLinkedin className="text-3xl lg:text-4xl text-blue-600 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
               </a>
-              <a href="https://github.com/Buddhiimz" className="group relative z-10">
+              <a
+                href="https://github.com/Buddhiimz"
+                className="group relative z-10"
+              >
                 <FaGithub className="text-3xl lg:text-4xl transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-purple-500" />
               </a>
-              <a href="https://instagram.com/buddhimxx" className="group relative z-10">
+              <a
+                href="https://instagram.com/buddhimxx"
+                className="group relative z-10"
+              >
                 <FaInstagram className="text-3xl lg:text-4xl text-pink-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-red-500" />
               </a>
-              <a href="https://fb.com/ag buddhima" className="group relative z-10">
+              <a
+                href="https://fb.com/ag buddhima"
+                className="group relative z-10"
+              >
                 <FaFacebookSquare className="text-3xl lg:text-4xl text-blue-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
               </a>
               <a href="#" className="group relative z-10">
@@ -210,13 +234,22 @@ const Hero = () => {
             alt="Buddhima"
             className="w-full max-w-sm lg:max-w-full rounded-lg"
             style={{
-              marginRight: "110px",
+              marginRight: "0px",
               marginTop: "-100px",
               borderRadius: "15px",
-              maxWidth: "100%",
+              maxWidth: "110%",
             }}
           />
         </div>
+        <style>
+          {`
+            @media (min-width: 1024px) { /* lg breakpoint */
+              img[alt="Buddhima"] {
+                margin-right: 110px !important;
+              }
+            }
+          `}
+        </style>
       </div>
     </div>
   );
