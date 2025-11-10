@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { PROJECTS } from '../constants/index.js';
+import React, { useRef, useEffect, useState } from "react";
+import { PROJECTS } from "../constants/index.js";
 import { FaGithub } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
 
@@ -35,7 +35,7 @@ const Projects = () => {
     const timeoutId = setTimeout(updateLinePositions, 500);
 
     // Add resize listener
-    window.addEventListener('resize', updateLinePositions);
+    window.addEventListener("resize", updateLinePositions);
 
     // Create intersection observer
     const observer = new IntersectionObserver(
@@ -54,7 +54,7 @@ const Projects = () => {
     // Cleanup
     return () => {
       clearTimeout(timeoutId);
-      window.removeEventListener('resize', updateLinePositions);
+      window.removeEventListener("resize", updateLinePositions);
       if (ref.current) {
         observer.unobserve(ref.current);
       }
@@ -63,7 +63,7 @@ const Projects = () => {
 
   // Handle image loading
   useEffect(() => {
-    const images = ref.current?.getElementsByTagName('img') || [];
+    const images = ref.current?.getElementsByTagName("img") || [];
     let loadedImages = 0;
 
     const handleImageLoad = () => {
@@ -73,44 +73,50 @@ const Projects = () => {
       }
     };
 
-    Array.from(images).forEach(img => {
+    Array.from(images).forEach((img) => {
       if (img.complete) {
         handleImageLoad();
       } else {
-        img.addEventListener('load', handleImageLoad);
+        img.addEventListener("load", handleImageLoad);
       }
     });
 
     return () => {
-      Array.from(images).forEach(img => {
-        img.removeEventListener('load', handleImageLoad);
+      Array.from(images).forEach((img) => {
+        img.removeEventListener("load", handleImageLoad);
       });
     };
   }, []);
 
   return (
-    <div id="project"
-    className="pb-4 mt-6 px-4 sm:px-6 md:px-8" ref={ref}>
-      {/* Title */}
-      <motion.h1
+    <div id="project" className="pb-4 mt-6 px-4 sm:px-6 md:px-8" ref={ref}>
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -50 }}
-        transition={{ duration: 1 }}
-        className="text-3xl lg:text-4xl text-center mb-8 font-bold"
-        style={{
-          fontFamily: "'Poppins', sans-serif",
-        }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center mb-16"
       >
-        <span
-          className="text-transparent bg-clip-text"
+        {/* Title */}
+        <motion.h1
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -50 }}
+          transition={{ duration: 1 }}
+          className="text-3xl lg:text-4xl text-center -mt-14"
           style={{
-            background: "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
-            WebkitBackgroundClip: "text",
+            fontFamily: "'Poppins', sans-serif",
+            fontWeight: "bold",
           }}
         >
-          Projects
-        </span>
-      </motion.h1>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+            Academic{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
+              Projects
+            </span>
+          </h2>
+        </motion.h1>
+        <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full mt-2"></div>
+      </motion.div>
 
       {/* Projects Container */}
       <div className="relative max-w-6xl mx-auto">
@@ -130,23 +136,31 @@ const Projects = () => {
         {PROJECTS.map((project, index) => {
           const isEven = index % 2 === 0;
           const isLast = index === PROJECTS.length - 1;
-          
+
           return (
             <motion.div
               key={index}
               className="mb-[35px] px-4 sm:px-0"
-              ref={index === 0 ? firstProjectRef : isLast ? lastProjectRef : null}
+              ref={
+                index === 0 ? firstProjectRef : isLast ? lastProjectRef : null
+              }
             >
               <div
-                className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-6`}
+                className={`flex flex-col ${
+                  isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+                } items-center gap-6`}
               >
                 {/* Project Card Container with Dot */}
                 <div
-                  className={`w-full lg:w-5/12 relative ${isEven ? "lg:pr-8" : "lg:pl-8"}`}
+                  className={`w-full lg:w-5/12 relative ${
+                    isEven ? "lg:pr-8" : "lg:pl-8"
+                  }`}
                 >
                   {/* Timeline dot */}
                   <div
-                    className={`hidden lg:block absolute top-1/2 ${isEven ? "-right-4" : "-left-4"} -translate-y-1/2`}
+                    className={`hidden lg:block absolute top-1/2 ${
+                      isEven ? "-right-4" : "-left-4"
+                    } -translate-y-1/2`}
                   >
                     <div className="w-4 h-4 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 relative z-10">
                       <div className="absolute inset-0.5 rounded-full bg-neutral-900" />
@@ -235,7 +249,10 @@ const Projects = () => {
                               delay: 0.3 + techIndex * 0.1,
                             }}
                             className="px-2 py-0.5 rounded-full text-white border border-gray-600 rounded-lg p-4"
-                            style={{ fontFamily: "'Poppins', sans-serif", fontSize: "13px" }}
+                            style={{
+                              fontFamily: "'Poppins', sans-serif",
+                              fontSize: "13px",
+                            }}
                           >
                             {tech}
                           </motion.span>

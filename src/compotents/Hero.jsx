@@ -165,9 +165,9 @@ const Hero = () => {
               animate="visible"
               className="relative flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 rounded-lg p-4"
               style={{
-                border: "2px solid rgba(221, 132, 72, 0.6)",
+                border: "2px solid rgba(6, 182, 212, 0.6)",
                 boxShadow:
-                  "0 0 20px rgba(221, 132, 72, 0.3), inset 0 0 20px rgba(221, 132, 72, 0.1)",
+                  "0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)",
               }}
             >
               {/* Electric effect overlays */}
@@ -176,49 +176,88 @@ const Hero = () => {
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(90deg, transparent, rgba(221, 132, 72, 0.4), transparent)",
+                      "linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.4), rgba(6, 182, 212, 0.4), rgba(20, 184, 166, 0.4), transparent)",
                     animation: "electric-flow 3s linear infinite",
                   }}
                 />
               </div>
               <style>
                 {`
-                  @keyframes electric-flow {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
-                  }
-                  @keyframes pulse-glow {
-                    0%, 100% { opacity: 0.6; }
-                    50% { opacity: 1; }
-                  }
-                `}
+      @keyframes electric-flow {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+    `}
               </style>
+
+              {/* LinkedIn */}
+
               <a
-                href="https://www.linkedin.com/in/buddhima-vilochana-47251328a"
+                href="https://www.linkedin.com/in/buddhiimz"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative z-10"
               >
-                <FaLinkedin className="text-3xl lg:text-4xl text-blue-600 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
+                <div className="relative">
+                  <FaLinkedin className="text-3xl lg:text-4xl text-cyan-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
+                </div>
               </a>
+
+              {/* GitHub */}
+
               <a
                 href="https://github.com/Buddhiimz"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative z-10"
               >
-                <FaGithub className="text-3xl lg:text-4xl transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-purple-500" />
+                <div className="relative">
+                  <FaGithub className="text-3xl lg:text-4xl text-neutral-300 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
+                </div>
               </a>
+
+              {/* Instagram */}
+
               <a
                 href="https://instagram.com/buddhimxx"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative z-10"
               >
-                <FaInstagram className="text-3xl lg:text-4xl text-pink-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-red-500" />
+                <div className="relative">
+                  <FaInstagram className="text-3xl lg:text-4xl text-teal-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
+                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
+                </div>
               </a>
+
+              {/* Facebook */}
+
               <a
                 href="https://fb.com/ag buddhima"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative z-10"
               >
-                <FaFacebookSquare className="text-3xl lg:text-4xl text-blue-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-blue-500" />
+                <div className="relative">
+                  <FaFacebookSquare className="text-3xl lg:text-4xl text-cyan-500 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
+                </div>
               </a>
-              <a href="#" className="group relative z-10">
-                <RiTwitterXFill className="text-3xl lg:text-4xl text-white-500 transition duration-300 ease-in-out transform hover:scale-110 hover:border-b-4 hover:border-gray-500" />
+
+              {/* Twitter/X */}
+
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative z-10"
+              >
+                <div className="relative">
+                  <RiTwitterXFill className="text-3xl lg:text-4xl text-neutral-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
+                </div>
               </a>
             </motion.div>
           </div>

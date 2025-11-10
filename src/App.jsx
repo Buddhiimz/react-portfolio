@@ -6,6 +6,7 @@ import Project from "./pages/Project";
 import Contacts from "./pages/Contacts";
 import Services from "./compotents/Services"; // Fixed typo in filename
 import Navbar from "./compotents/Navbar"; // Import Navbar
+import Experience from "./pages/Experience";
 
 const App = () => {
   return (
@@ -57,6 +58,7 @@ const App = () => {
         <section id="home"><Home /></section>
         <section id="about-me"><AboutMe /></section>
         <section id="tech"><Tech /></section>
+        <section id="Experience"><Experience /></section>
         <section id="project"><Project /></section>
         <section id="services"><Services /></section>
         <section id="contacts"><Contacts /></section>
