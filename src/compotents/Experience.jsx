@@ -6,6 +6,9 @@ import {
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
+import Fproject1 from "../assets/projects/FProject2.png";
+import Fproject2 from "../assets/projects/FProject1.png";
+import Fproject3 from "../assets/projects/FProject3.png"; 
 
 const experiences = [
   {
@@ -30,7 +33,7 @@ const projects = [
   {
     id: 1,
     name: "Planet First Web Application",
-    image: "src/assets/Project1.png", // Add your image path here
+    image: Fproject1,
     link: "https://theplanetfirst.org/",
     description:
       "Developed an eco-focused web platform to promote sustainable living and user engagement. Built and deployed a Carbon Footprint Calculator, enabling 200+ users to track sustainability. Integrated PHPMailer for contact form and FPDF for automated PDF report generation.",
@@ -46,7 +49,7 @@ const projects = [
   {
     id: 2,
     name: "illumin-labs Portfolio Web Application",
-    image: "src/assets/Project2.png", // Add your image path here
+    image: Fproject2, 
     link: "https://illuminlabs.net/",
     description:
       "Developed a responsive portfolio website with modern UI/UX using React and Tailwind CSS. Implemented project showcase, smooth animations, and integrated contact form with EmailJS. Improved Lighthouse performance score by 20% through image compression.",
@@ -55,7 +58,7 @@ const projects = [
   {
     id: 3,
     name: "GreenGleam Cleaning Platform",
-    image: "src/assets/Project3.png", // Add your image path here
+    image: Fproject3,
     link: "https://greengleam.com.au/",
     description:
       "Built a booking management platform with flexible scheduling, real-time validation, and checkout integration, enabling 100+ users to book services with a 99% success rate. Implemented service-type-based discount logic and integrated Google Review widget for customer feedback.",
