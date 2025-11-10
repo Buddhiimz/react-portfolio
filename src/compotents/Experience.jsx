@@ -33,7 +33,7 @@ const projects = [
   {
     id: 1,
     name: "Planet First Web Application",
-    image: Fproject1,
+    image: Fproject2,
     link: "https://theplanetfirst.org/",
     description:
       "Developed an eco-focused web platform to promote sustainable living and user engagement. Built and deployed a Carbon Footprint Calculator, enabling 200+ users to track sustainability. Integrated PHPMailer for contact form and FPDF for automated PDF report generation.",
@@ -49,7 +49,7 @@ const projects = [
   {
     id: 2,
     name: "illumin-labs Portfolio Web Application",
-    image: Fproject2, 
+    image: Fproject1, 
     link: "https://illuminlabs.net/",
     description:
       "Developed a responsive portfolio website with modern UI/UX using React and Tailwind CSS. Implemented project showcase, smooth animations, and integrated contact form with EmailJS. Improved Lighthouse performance score by 20% through image compression.",
