@@ -87,7 +87,6 @@ const PROJECTS = [
   },
 ];
 
-
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [hoveredProject, setHoveredProject] = useState(null);
@@ -172,9 +171,9 @@ const Projects = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true}}
-        style={{ marginTop: "-30px"}}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12"
+        viewport={{ once: true }}
+        style={{ marginTop: "-30px" }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12 "
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => (
@@ -187,7 +186,7 @@ const Projects = () => {
               className="group relative"
             >
               {/* Glow Effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-500"></div>
+              
 
               {/* Card */}
               <div className="relative bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 h-full flex flex-col">
@@ -205,7 +204,7 @@ const Projects = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
-                    className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent flex items-center justify-center gap-4"
+                    className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent flex items-center justify-center gap-4 hover:border-cyan-400/50"
                   >
                     <motion.a
                       href={project.link}

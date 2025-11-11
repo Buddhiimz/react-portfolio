@@ -79,6 +79,28 @@ const projects = [
   },
 ];
 
+const Particle = ({ delay }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{
+      opacity: [0, 1, 0],
+      scale: [0, 1, 0],
+      y: [0, -100], // Moves upward from bottom to top
+    }}
+    transition={{
+      duration: 3,
+      delay,
+      repeat: Infinity,
+      repeatDelay: 2,
+    }}
+    className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+    style={{
+      left: `${Math.random() * 100}%`,
+      bottom: 0, // Starts at bottom
+    }}
+  />
+);
+
 const containerVariant = {
   hidden: { opacity: 0 },
   visible: {
@@ -141,8 +163,15 @@ const ProjectCarousel = () => {
           {projects.map((project) => (
             <div key={project.id} className="min-w-full px-1 sm:px-2">
               {/* Project Card */}
-              <div className="bg-neutral-900 rounded-lg sm:rounded-xl border border-neutral-800 overflow-hidden max-w-3xl mx-auto shadow-lg">
-                <div className="flex flex-col">
+              <div className="group rounded-lg sm:rounded-xl border border-neutral-800 overflow-hidden max-w-3xl mx-auto shadow-lg relative">
+                {/* Glow Effect */}
+
+                <div className="relative flex flex-col overflow-hidden">
+                  {/* Particles */}
+                  {[...Array(5)].map((_, i) => (
+                    <Particle key={i} delay={i * 0.5} />
+                  ))}
+
                   {/* Image Section */}
                   <div className="relative overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-900 h-40 sm:h-48 lg:h-56">
                     {project.image ? (
@@ -261,7 +290,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className="relative px-4 sm:px-6 md:px-12 lg:px-28 pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 lg:pb-12 max-w-screen overflow-hidden bg-neutral-950"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-28 pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 lg:pb-12 max-w-screen overflow-hidden"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Work Experience Section */}
@@ -276,7 +305,7 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -50 }}
           transition={{ duration: 1 }}
-          style = {{marginTop: "-40px"}}
+          style={{ marginTop: "-40px" }}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-center"
         >
           My{" "}
@@ -312,9 +341,16 @@ const Experience = () => {
 
             {/* Experience Card */}
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-lg sm:rounded-xl opacity-30 group-hover:opacity-50 blur transition duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-lg sm:rounded-xl opacity-30 group-hover:opacity-25 blur transition duration-300"></div>
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-xl opacity-0 group-hover:opacity-50 blur transition duration-500"></div>
 
-              <div className="relative bg-neutral-900 rounded-lg sm:rounded-xl p-4 sm:p-6 lg:p-8 border border-neutral-800 hover:border-cyan-400/50 transition duration-300">
+              <div className="relative bg-neutral-900 rounded-lg sm:rounded-xl p-4 sm:p-6 lg:p-8 border border-neutral-800 hover:border-cyan-400/50 transition duration-300 overflow-hidden">
+                {/* Particles */}
+                {[...Array(5)].map((_, i) => (
+                  <Particle key={i} delay={i * 0.5} />
+                ))}
+
                 <div className="flex items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-400 to-teal-400 rounded-lg flex items-center justify-center">
                     <FaBriefcase className="text-neutral-900 text-base sm:text-xl" />
@@ -350,7 +386,7 @@ const Experience = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        style = {{marginTop: "-40px"}}
+        style={{ marginTop: "-40px" }}
         className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12"
       >
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
