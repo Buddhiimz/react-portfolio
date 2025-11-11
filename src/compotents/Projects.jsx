@@ -24,7 +24,7 @@ const PROJECTS = [
       "Python",
       "Deep Learning",
     ],
-    link: "https://github.com",
+    link: "https://github.com/Buddhiimz/Orchid-Species-Identifier",
     category: "AI & Web Development",
   },
   {
@@ -62,7 +62,7 @@ const PROJECTS = [
       "Developed a full-stack web application using the MERN stack to manage medical tasks such as patient records, appointments, and prescriptions. Implemented an Appointment Management function that allows users to view available times for doctors upon selection, enhancing scheduling efficiency.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
     technologies: ["MERN Stack Technology", "Tailwind CSS"],
-    link: "https://github.com",
+    link: "https://github.com/Y3-S1-project-group",
     category: "Web Development",
   },
   {
