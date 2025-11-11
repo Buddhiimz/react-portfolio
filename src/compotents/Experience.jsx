@@ -49,11 +49,11 @@ const projects = [
   {
     id: 2,
     name: "illumin-labs Portfolio Web Application",
-    image: Fproject1, 
+    image: Fproject1,
     link: "https://illuminlabs.net/",
     description:
       "Developed a responsive portfolio website with modern UI/UX using React and Tailwind CSS. Implemented project showcase, smooth animations, and integrated contact form with EmailJS. Improved Lighthouse performance score by 20% through image compression.",
-    technologies: ["ReactJS", "Tailwind CSS", "JavaScript", "EmailJS"],
+    technologies: ["ReactJS", "Tailwind CSS", "JavaScript", "EmailJS" , "Framer Motion"],
   },
   {
     id: 3,
@@ -125,7 +125,7 @@ const ProjectCarousel = () => {
   };
 
   return (
-    <div className="relative max-w-6xl mx-auto px-4">
+    <div className="relative max-w-6xl mx-auto px-2 sm:px-4">
       {/* Carousel Container */}
       <div className="relative overflow-hidden">
         <motion.div
@@ -133,13 +133,12 @@ const ProjectCarousel = () => {
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {projects.map((project) => (
-            <div key={project.id} className="min-w-full px-2">
+            <div key={project.id} className="min-w-full px-1 sm:px-2">
               {/* Project Card */}
-              {/* Project Card */}
-              <div className="bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden max-w-3xl mx-auto shadow-lg">
+              <div className="bg-neutral-900 rounded-lg sm:rounded-xl border border-neutral-800 overflow-hidden max-w-3xl mx-auto shadow-lg">
                 <div className="flex flex-col">
-                  {/* Image Section - Vertical */}
-                  <div className="relative overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-900 h-48 lg:h-56">
+                  {/* Image Section */}
+                  <div className="relative overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-900 h-40 sm:h-48 lg:h-56">
                     {project.image ? (
                       <img
                         src={project.image}
@@ -148,11 +147,11 @@ const ProjectCarousel = () => {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <div className="text-center p-6">
-                          <div className="w-16 h-16 mx-auto bg-gradient-to-br from-cyan-400 to-teal-400 rounded-xl flex items-center justify-center mb-3">
-                            <span className="text-2xl">🚀</span>
+                        <div className="text-center p-4 sm:p-6">
+                          <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto bg-gradient-to-br from-cyan-400 to-teal-400 rounded-xl flex items-center justify-center mb-3">
+                            <span className="text-xl sm:text-2xl">🚀</span>
                           </div>
-                          <p className="text-neutral-400 font-medium text-sm">
+                          <p className="text-neutral-400 font-medium text-xs sm:text-sm">
                             Project Screenshot
                           </p>
                         </div>
@@ -161,18 +160,18 @@ const ProjectCarousel = () => {
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-5 lg:p-6">
+                  <div className="p-4 sm:p-5 lg:p-6">
                     {/* Description */}
-                    <p className="text-neutral-300 text-sm leading-relaxed mb-4 text-justify">
+                    <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 text-justify">
                       {project.description}
                     </p>
 
                     {/* Technologies */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
                       {project.technologies.map((tech, idx) => (
                         <span
                           key={idx}
-                          className="px-2.5 py-0.5 text-xs font-medium bg-gradient-to-r from-cyan-400/10 to-teal-400/10 text-cyan-300 rounded-full border border-cyan-400/20"
+                          className="px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs font-medium bg-gradient-to-r from-cyan-400/10 to-teal-400/10 text-cyan-300 rounded-full border border-cyan-400/20"
                         >
                           {tech}
                         </span>
@@ -180,18 +179,18 @@ const ProjectCarousel = () => {
                     </div>
 
                     {/* Project Info */}
-                    <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-3 border-t border-neutral-800 gap-2 sm:gap-0">
                       <div>
-                        <h4 className="font-bold text-white text-base mb-1">
+                        <h4 className="font-bold text-white text-sm sm:text-base mb-1">
                           {project.name}
                         </h4>
                         <a
                           href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-cyan-400 hover:text-cyan-300 text-xs font-medium flex items-center gap-2 transition-colors"
+                          className="text-cyan-400 hover:text-cyan-300 text-xs font-medium flex items-center gap-1.5 sm:gap-2 transition-colors"
                         >
-                          View Project <FaExternalLinkAlt className="text-xs" />
+                          View Project <FaExternalLinkAlt className="text-[10px] sm:text-xs" />
                         </a>
                       </div>
                     </div>
@@ -203,30 +202,46 @@ const ProjectCarousel = () => {
         </motion.div>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Hidden on very small screens */}
       <button
         onClick={prevSlide}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-12 h-12 bg-neutral-800 border border-neutral-700 rounded-full shadow-lg flex items-center justify-center text-neutral-300 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-teal-400 hover:text-neutral-900 hover:border-transparent transition-all duration-300 z-10"
+        className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 lg:-translate-x-12 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 border border-neutral-700 rounded-full shadow-lg items-center justify-center text-neutral-300 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-teal-400 hover:text-neutral-900 hover:border-transparent transition-all duration-300 z-10"
       >
-        <FaChevronLeft />
+        <FaChevronLeft className="text-sm sm:text-base" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-12 h-12 bg-neutral-800 border border-neutral-700 rounded-full shadow-lg flex items-center justify-center text-neutral-300 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-teal-400 hover:text-neutral-900 hover:border-transparent transition-all duration-300 z-10"
+        className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 lg:translate-x-12 w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 border border-neutral-700 rounded-full shadow-lg items-center justify-center text-neutral-300 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-teal-400 hover:text-neutral-900 hover:border-transparent transition-all duration-300 z-10"
       >
-        <FaChevronRight />
+        <FaChevronRight className="text-sm sm:text-base" />
       </button>
 
+      {/* Mobile Navigation Buttons */}
+      <div className="flex sm:hidden justify-center gap-4 mt-4">
+        <button
+          onClick={prevSlide}
+          className="w-10 h-10 bg-neutral-800 border border-neutral-700 rounded-full shadow-lg flex items-center justify-center text-neutral-300 active:bg-gradient-to-r active:from-cyan-400 active:to-teal-400 active:text-neutral-900 transition-all duration-300"
+        >
+          <FaChevronLeft className="text-sm" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="w-10 h-10 bg-neutral-800 border border-neutral-700 rounded-full shadow-lg flex items-center justify-center text-neutral-300 active:bg-gradient-to-r active:from-cyan-400 active:to-teal-400 active:text-neutral-900 transition-all duration-300"
+        >
+          <FaChevronRight className="text-sm" />
+        </button>
+      </div>
+
       {/* Dots Indicator */}
-      <div className="flex justify-center gap-2 mt-8">
+      <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-8">
         {projects.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? "bg-cyan-500 w-8"
-                : "bg-neutral-300 hover:bg-neutral-400"
+                ? "bg-cyan-500 w-6 sm:w-8"
+                : "bg-neutral-300 hover:bg-neutral-400 w-2 sm:w-3"
             }`}
           />
         ))}
@@ -239,7 +254,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className="relative px-4 lg:px-28 py-20 max-w-screen overflow-hidden"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-28 py-12 sm:py-16 lg:py-20 max-w-screen overflow-hidden bg-neutral-950"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Work Experience Section */}
@@ -248,16 +263,13 @@ const Experience = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-8"
+        className="text-center mb-6 sm:mb-8"
       >
         <motion.h1
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -50 }}
           transition={{ duration: 1 }}
-          className="mt-0 text-4xl lg:text-5xl font-bold text-white mb-4 text-center"
-          style={{
-            marginTop: "-50px",
-          }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-center"
         >
           My{" "}
           <span
@@ -272,7 +284,7 @@ const Experience = () => {
             Experience
           </span>
         </motion.h1>
-        <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
+        <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
       </motion.div>
 
       {/* Experience Cards */}
@@ -281,41 +293,41 @@ const Experience = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-8 mb-20 max-w-5xl mx-auto"
+        className="space-y-6 sm:space-y-8 mb-12 sm:mb-16 lg:mb-20 max-w-5xl mx-auto"
       >
         {experiences.map((exp, index) => (
           <motion.div key={exp.id} variants={itemVariant} className="relative">
             {/* Timeline connector */}
             {index !== 0 && (
-              <div className="absolute left-6 lg:left-8 -top-8 w-0.5 h-8 bg-gradient-to-b from-cyan-400/50 to-transparent"></div>
+              <div className="absolute left-5 sm:left-6 lg:left-8 -top-6 sm:-top-8 w-0.5 h-6 sm:h-8 bg-gradient-to-b from-cyan-400/50 to-transparent"></div>
             )}
 
             {/* Experience Card */}
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-xl opacity-30 group-hover:opacity-50 blur transition duration-300 bot"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-lg sm:rounded-xl opacity-30 group-hover:opacity-50 blur transition duration-300"></div>
 
-              <div className="relative bg-neutral-900 rounded-xl p-6 lg:p-8 border border-neutral-800 hover:border-cyan-400/50 transition duration-300">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-400 to-teal-400 rounded-lg flex items-center justify-center">
-                    <FaBriefcase className="text-neutral-900 text-xl" />
+              <div className="relative bg-neutral-900 rounded-lg sm:rounded-xl p-4 sm:p-6 lg:p-8 border border-neutral-800 hover:border-cyan-400/50 transition duration-300">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-400 to-teal-400 rounded-lg flex items-center justify-center">
+                    <FaBriefcase className="text-neutral-900 text-base sm:text-xl" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-1">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-1 break-words">
                       {exp.role}
                     </h3>
-                    <p className="text-cyan-400 font-semibold text-base lg:text-lg">
+                    <p className="text-cyan-400 font-semibold text-sm sm:text-base lg:text-lg break-words">
                       {exp.company}
                     </p>
-                    <p className="text-neutral-400 text-sm mt-1 mb-3">
+                    <p className="text-neutral-400 text-xs sm:text-sm mt-1 mb-2 sm:mb-3">
                       {exp.period}
                     </p>
-                    <p className="text-neutral-300 leading-relaxed text-xs lg:text-sm">
+                    <p className="text-neutral-300 leading-relaxed text-xs sm:text-sm lg:text-base">
                       {exp.description}
                     </p>
                   </div>
                 </div>
                 {/* Bottom accent line */}
-                <div className="mt-4 pt-3 border-t border-neutral-800">
+                <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-neutral-800">
                   <div className="h-1 w-full bg-gradient-to-r from-cyan-400/50 to-teal-400/50 rounded-full group-hover:from-cyan-400 group-hover:to-teal-400 transition-all duration-300"></div>
                 </div>
               </div>
@@ -330,18 +342,15 @@ const Experience = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-6 mt-6"
-        style={{
-          marginTop: "-30px",
-        }}
+        className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12"
       >
-        <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
           Featured{" "}
           <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
             Projects
           </span>
         </h1>
-        <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
+        <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
       </motion.div>
 
       <ProjectCarousel />
