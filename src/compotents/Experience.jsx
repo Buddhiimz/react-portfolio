@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import Fproject1 from "../assets/projects/FProject2.png";
 import Fproject2 from "../assets/projects/FProject1.png";
-import Fproject3 from "../assets/projects/FProject3.png"; 
+import Fproject3 from "../assets/projects/FProject3.png";
 
 const experiences = [
   {
@@ -53,7 +53,13 @@ const projects = [
     link: "https://illuminlabs.net/",
     description:
       "Developed a responsive portfolio website with modern UI/UX using React and Tailwind CSS. Implemented project showcase, smooth animations, and integrated contact form with EmailJS. Improved Lighthouse performance score by 20% through image compression.",
-    technologies: ["ReactJS", "Tailwind CSS", "JavaScript", "EmailJS" , "Framer Motion"],
+    technologies: [
+      "ReactJS",
+      "Tailwind CSS",
+      "JavaScript",
+      "EmailJS",
+      "Framer Motion",
+    ],
   },
   {
     id: 3,
@@ -125,7 +131,7 @@ const ProjectCarousel = () => {
   };
 
   return (
-    <div className="relative max-w-6xl mx-auto px-2 sm:px-4">
+    <div className="relative max-w-6xl mx-auto px-2 sm:px-4 ">
       {/* Carousel Container */}
       <div className="relative overflow-hidden">
         <motion.div
@@ -190,7 +196,8 @@ const ProjectCarousel = () => {
                           rel="noopener noreferrer"
                           className="text-cyan-400 hover:text-cyan-300 text-xs font-medium flex items-center gap-1.5 sm:gap-2 transition-colors"
                         >
-                          View Project <FaExternalLinkAlt className="text-[10px] sm:text-xs" />
+                          View Project{" "}
+                          <FaExternalLinkAlt className="text-[10px] sm:text-xs" />
                         </a>
                       </div>
                     </div>
@@ -254,7 +261,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className="relative px-4 sm:px-6 md:px-12 lg:px-28 py-12 sm:py-16 lg:py-20 max-w-screen overflow-hidden bg-neutral-950"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-28 pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 lg:pb-12 max-w-screen overflow-hidden bg-neutral-950"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Work Experience Section */}
@@ -269,6 +276,7 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -50 }}
           transition={{ duration: 1 }}
+          style = {{marginTop: "-40px"}}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-center"
         >
           My{" "}
@@ -342,11 +350,12 @@ const Experience = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
+        style = {{marginTop: "-40px"}}
         className="text-center mb-6 sm:mb-8 mt-8 sm:mt-12"
       >
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
           Featured{" "}
-          <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent ">
             Projects
           </span>
         </h1>

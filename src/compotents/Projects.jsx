@@ -1,286 +1,307 @@
-import React, { useRef, useEffect, useState } from "react";
-import { PROJECTS } from "../constants/index.js";
-import { FaGithub } from "react-icons/fa";
-import { motion, useScroll } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaCode,
+  FaLayerGroup,
+} from "react-icons/fa";
+import project7 from "../assets/projects/project-7.png";
+
+// Sample projects data - replace with your PROJECTS import
+const PROJECTS = [
+  {
+    id: 1,
+    title: "Orchid Species Identification System",
+    description:
+      "Developed a deep learning–based web application capable of identifying 52 orchid species from uploaded images. Integrated CNN model (InceptionV3) using transfer learning for high accuracy and real-time predictions. Built an Angular frontend for interactive image uploads and result visualization.",
+    image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800",
+    technologies: [
+      "Angular",
+      "TensorFlow",
+      "Keras",
+      "Flask",
+      "Python",
+      "Deep Learning",
+    ],
+    link: "https://github.com",
+    category: "AI & Web Development",
+  },
+  {
+    id: 2,
+    title: "Restaurant Management Service – Food Delivery System",
+    description:
+      "Developed a microservice-based food delivery platform with restaurant registration, menu management, and role-based access. Implemented owner-level logic, admin approval workflows, and an API Gateway for service routing. Built the frontend using React & Tailwind CSS, and performed end-to-end testing with Cypress.",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800",
+    technologies: [
+      "ReactJS",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Docker",
+      "Cypress",
+    ],
+    link: "https://github.com/Y3-S2-project-group",
+    category: "Full Stack Development",
+  },
+  {
+    id: 3,
+    title: "FieldExpert - Farm Management System",
+    description:
+      "Developed a web application to help farmers manage their agricultural data, such as crop records, pest and disease information. Implemented a Sales and Distribution function to streamline the sales process and enhance distribution efficiency.",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
+    technologies: ["MERN Stack Technology"],
+    link: "https://github.com/Y3-S1-project-group",
+    category: "Web Development",
+  },
+  {
+    id: 4,
+    title: "MediCare - Hospital Management Web Application",
+    description:
+      "Developed a full-stack web application using the MERN stack to manage medical tasks such as patient records, appointments, and prescriptions. Implemented an Appointment Management function that allows users to view available times for doctors upon selection, enhancing scheduling efficiency.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
+    technologies: ["MERN Stack Technology", "Tailwind CSS"],
+    link: "https://github.com",
+    category: "Web Development",
+  },
+  {
+    id: 5,
+    title: "OceanicCare - Mobile Application",
+    description:
+      "Developed a mobile application focused on marine conservation, featuring functionalities such as a Marine Life Encyclopedia, Beach Cleanup Events, Sustainable Seafood Guide, and Ocean Pollution.",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+    technologies: ["Flutter", "Firebase", "Dart"],
+    link: "https://github.com/Buddhiimz/OceanicCare_App",
+    category: "Mobile Development",
+  },
+  {
+    id: 6,
+    title: "Angular Login System",
+    description:
+      "Developed a full-stack web application with an Angular frontend featuring user registration, login, dashboard, and password recovery modules. Implemented a secure .NET backend using JWT authentication and password hashing. Designed and optimized an MSSQL database with stored procedures for efficient data management.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
+    technologies: ["Angular", "TypeScript", ".NET", "MSSQL", "JWT"],
+    link: "https://github.com/Buddhiimz/Auth-fe",
+    category: "Web Development",
+  },
+];
+
 
 const Projects = () => {
-  const ref = useRef(null);
-  const firstProjectRef = useRef(null);
-  const lastProjectRef = useRef(null);
-  const [lineStart, setLineStart] = useState(0);
-  const [lineEnd, setLineEnd] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [hoveredProject, setHoveredProject] = useState(null);
 
-  // Function to calculate and update line positions
-  const updateLinePositions = () => {
-    if (firstProjectRef.current && lastProjectRef.current && ref.current) {
-      const containerRect = ref.current.getBoundingClientRect();
-      const firstProjectRect = firstProjectRef.current.getBoundingClientRect();
-      const lastProjectRect = lastProjectRef.current.getBoundingClientRect();
+  const categories = ["All", ...new Set(PROJECTS.map((p) => p.category))];
 
-      // Calculate relative positions
-      const start = firstProjectRect.top - containerRect.top + 110;
-      const end = lastProjectRect.bottom - firstProjectRect.top - 445;
+  const filteredProjects =
+    selectedCategory === "All"
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.category === selectedCategory);
 
-      setLineStart(start);
-      setLineEnd(Math.max(end, 100)); // Ensure minimum height
-    }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   };
 
-  useEffect(() => {
-    // Initial calculation with delay
-    const timeoutId = setTimeout(updateLinePositions, 500);
-
-    // Add resize listener
-    window.addEventListener("resize", updateLinePositions);
-
-    // Create intersection observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          updateLinePositions();
-        }
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+      scale: 0.9,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
       },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    // Cleanup
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener("resize", updateLinePositions);
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
-
-  // Handle image loading
-  useEffect(() => {
-    const images = ref.current?.getElementsByTagName("img") || [];
-    let loadedImages = 0;
-
-    const handleImageLoad = () => {
-      loadedImages++;
-      if (loadedImages === images.length) {
-        updateLinePositions();
-      }
-    };
-
-    Array.from(images).forEach((img) => {
-      if (img.complete) {
-        handleImageLoad();
-      } else {
-        img.addEventListener("load", handleImageLoad);
-      }
-    });
-
-    return () => {
-      Array.from(images).forEach((img) => {
-        img.removeEventListener("load", handleImageLoad);
-      });
-    };
-  }, []);
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.9,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
 
   return (
-    <div id="project" className="pb-4 mt-6 px-4 sm:px-6 md:px-8" ref={ref}>
+    <div
+      id="project"
+      className=" px-4 sm:px-6 lg:px-8 bg-neutral-950"
+      style={{ fontFamily: "'Poppins', sans-serif" }}
+    >
+      {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="text-center mb-8 sm:mb-12"
       >
-        {/* Title */}
-        <motion.h1
+        <motion.h2
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4"
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: -50 }}
-          transition={{ duration: 1 }}
-          className="text-3xl lg:text-4xl text-center -mt-14"
-          style={{
-            fontFamily: "'Poppins', sans-serif",
-            fontWeight: "bold",
-          }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-            Academic{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
-              Projects
-            </span>
-          </h2>
-        </motion.h1>
-        <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full mt-2"></div>
+          Academic{" "}
+          <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
+            Projects
+          </span>
+        </motion.h2>
+        <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
+
+        <p className="text-neutral-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base">
+          Explore my collection of academic and personal projects showcasing
+          various technologies and skills
+        </p>
       </motion.div>
 
-      {/* Projects Container */}
-      <div className="relative max-w-6xl mx-auto">
-        {/* Timeline line */}
-        <motion.div
-          className="absolute left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-cyan-400 to-teal-400"
-          style={{
-            top: `${lineStart}px`,
-            height: `${lineEnd}px`,
-            scaleY: scrollYProgress,
-            transformOrigin: "top",
-            opacity: lineEnd > 0 ? 1 : 0,
-          }}
-        />
-
-        {/* Projects */}
-        {PROJECTS.map((project, index) => {
-          const isEven = index % 2 === 0;
-          const isLast = index === PROJECTS.length - 1;
-
-          return (
+      {/* Projects Grid */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true}}
+        style={{ marginTop: "-30px"}}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12"
+      >
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project, index) => (
             <motion.div
-              key={index}
-              className="mb-[35px] px-4 sm:px-0"
-              ref={
-                index === 0 ? firstProjectRef : isLast ? lastProjectRef : null
-              }
+              key={project.id}
+              variants={cardVariants}
+              layout
+              onHoverStart={() => setHoveredProject(project.id)}
+              onHoverEnd={() => setHoveredProject(null)}
+              className="group relative"
             >
-              <div
-                className={`flex flex-col ${
-                  isEven ? "lg:flex-row" : "lg:flex-row-reverse"
-                } items-center gap-6`}
-              >
-                {/* Project Card Container with Dot */}
-                <div
-                  className={`w-full lg:w-5/12 relative ${
-                    isEven ? "lg:pr-8" : "lg:pl-8"
-                  }`}
-                >
-                  {/* Timeline dot */}
-                  <div
-                    className={`hidden lg:block absolute top-1/2 ${
-                      isEven ? "-right-4" : "-left-4"
-                    } -translate-y-1/2`}
+              {/* Glow Effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-500"></div>
+
+              {/* Card */}
+              <div className="relative bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 h-full flex flex-col">
+                {/* Image Container */}
+                <div className="relative overflow-hidden h-48 sm:h-56 bg-neutral-800">
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                  />
+
+                  {/* Overlay on Hover */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
+                    className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent flex items-center justify-center gap-4"
                   >
-                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 relative z-10">
-                      <div className="absolute inset-0.5 rounded-full bg-neutral-900" />
-                    </div>
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="w-12 h-12 bg-cyan-400 rounded-full flex items-center justify-center text-neutral-900 hover:bg-cyan-300 transition-colors"
+                    >
+                      <FaGithub className="text-xl" />
+                    </motion.a>
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="w-12 h-12 bg-teal-400 rounded-full flex items-center justify-center text-neutral-900 hover:bg-teal-300 transition-colors"
+                    >
+                      <FaExternalLinkAlt className="text-lg" />
+                    </motion.a>
+                  </motion.div>
+
+                  {/* Category Badge */}
+                  <div className="absolute top-3 right-3 px-3 py-1 bg-neutral-900/90 backdrop-blur-sm rounded-full border border-cyan-400/30">
+                    <span className="text-cyan-400 text-xs font-medium">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5 sm:p-6 flex-1 flex flex-col">
+                  {/* Title */}
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-neutral-400 text-xs sm:text-sm mb-4 leading-6 flex-1 text-left">
+                    {project.description}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.technologies.map((tech, idx) => (
+                      <motion.span
+                        key={idx}
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: idx * 0.05 }}
+                        viewport={{ once: true }}
+                        className="px-2.5 py-1 text-[10px] sm:text-xs font-medium bg-gradient-to-r from-cyan-400/10 to-teal-400/10 text-cyan-300 rounded-md border border-cyan-400/20"
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
                   </div>
 
-                  {/* Project Card */}
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                      filter: "blur(10px)",
-                      transform: "scale(0.95)",
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      filter: "blur(0px)",
-                      transform: "scale(1)",
-                    }}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0px 10px 30px rgba(14, 165, 233, 0.5)",
-                    }}
-                    whileTap={{
-                      scale: 0.98,
-                    }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{
-                      duration: 0.8,
-                      ease: "easeOut",
-                    }}
-                    className="bg-neutral-900/50 p-4 sm:p-6 rounded-lg backdrop-blur-sm border border-neutral-800 relative overflow-hidden"
-                  >
-                    {/* Highlight overlay */}
+                  {/* Footer */}
+                  <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
+                    <div className="flex items-center gap-2 text-neutral-500 text-xs">
+                      <FaCode className="text-cyan-400" />
+                      <span>Open Source</span>
+                    </div>
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 0.1 }}
-                      transition={{ duration: 0.5 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400"
-                    />
-
-                    {/* Project Image */}
-                    <motion.img
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 }}
-                      src={project.image}
-                      alt={project.title || "Project Image"}
-                      className="w-full h-45 object-cover rounded-lg mb-4 relative z-10"
-                    />
-
-                    {/* Project Details */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 }}
-                      className="relative z-10"
+                      whileHover={{ x: 5 }}
+                      className="text-cyan-400 text-xs font-medium flex items-center gap-1 cursor-pointer"
                     >
-                      {/* Project Title */}
-                      <h6
-                        className="text-lg font-semibold mb-2 text-white"
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                      >
-                        {project.title}
-                      </h6>
-
-                      {/* Project Description */}
-                      <p
-                        className="text-neutral-400 mb-3 text-sm"
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                      >
-                        {project.description}
-                      </p>
-
-                      {/* Technologies */}
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {project.technologies.map((tech, techIndex) => (
-                          <motion.span
-                            key={techIndex}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{
-                              delay: 0.3 + techIndex * 0.1,
-                            }}
-                            className="px-2 py-0.5 rounded-full text-white border border-gray-600 rounded-lg p-4"
-                            style={{
-                              fontFamily: "'Poppins', sans-serif",
-                              fontSize: "13px",
-                            }}
-                          >
-                            {tech}
-                          </motion.span>
-                        ))}
-                      </div>
-
-                      {/* GitHub Link */}
-                      <motion.a
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
-                      >
-                        <FaGithub className="text-xl" />
-                        <span className="ml-2 text-sm">View Code</span>
-                      </motion.a>
+                      View Details
+                      <FaExternalLinkAlt className="text-[10px]" />
                     </motion.div>
-                  </motion.div>
+                  </div>
                 </div>
+
+                {/* Accent Line */}
+                <div className="h-1 bg-gradient-to-r from-cyan-400/0 via-cyan-400 to-cyan-400/0 group-hover:via-teal-400 transition-all duration-300"></div>
               </div>
             </motion.div>
-          );
-        })}
-      </div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Empty State */}
+      {filteredProjects.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center py-20"
+        >
+          <FaLayerGroup className="text-6xl text-neutral-700 mx-auto mb-4" />
+          <p className="text-neutral-400 text-lg">
+            No projects found in this category
+          </p>
+        </motion.div>
+      )}
     </div>
   );
 };
