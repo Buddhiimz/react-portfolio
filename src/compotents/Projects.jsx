@@ -6,9 +6,8 @@ import {
   FaCode,
   FaLayerGroup,
 } from "react-icons/fa";
-import project7 from "../assets/projects/project-7.png";
 
-// Sample projects data - replace with your PROJECTS import
+// Your projects data
 const PROJECTS = [
   {
     id: 1,
@@ -87,6 +86,28 @@ const PROJECTS = [
   },
 ];
 
+// Particle Component
+const Particle = ({ delay }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{
+      opacity: [0, 1, 0],
+      scale: [0, 1, 0],
+      y: [0, -200],
+    }}
+    transition={{
+      duration: 3,
+      delay,
+      repeat: Infinity,
+      repeatDelay: 2,
+    }}
+    className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+    style={{
+      left: `${Math.random() * 100}%`,
+      bottom: 0,
+    }}
+  />
+);
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -136,7 +157,7 @@ const Projects = () => {
   return (
     <div
       id="project"
-      className=" px-4 sm:px-6 lg:px-8"
+      className="px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Header Section */}
@@ -145,7 +166,7 @@ const Projects = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-8 sm:mb-12"
+        className="text-center mb-8 sm:mb-12 relative z-10"
       >
         <motion.h2
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4"
@@ -172,9 +193,8 @@ const Projects = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true}}
-        style={{ marginTop: "-30px"}}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12"
+        viewport={{ once: true }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12 relative z-10"
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => (
@@ -191,6 +211,15 @@ const Projects = () => {
 
               {/* Card */}
               <div className="relative bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 h-full flex flex-col">
+                {/* Particle Effect - Shows only when this card is hovered */}
+                {hoveredProject === project.id && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
+                    {[...Array(8)].map((_, i) => (
+                      <Particle key={i} delay={i * 0.2} />
+                    ))}
+                  </div>
+                )}
+
                 {/* Image Container */}
                 <div className="relative overflow-hidden h-48 sm:h-56 bg-neutral-800">
                   <motion.img
@@ -294,7 +323,7 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-20"
+          className="text-center py-20 relative z-10"
         >
           <FaLayerGroup className="text-6xl text-neutral-700 mx-auto mb-4" />
           <p className="text-neutral-400 text-lg">

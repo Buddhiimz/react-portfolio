@@ -3,14 +3,34 @@ import { motion } from "framer-motion";
 
 // Icon components as inline SVGs
 const CodeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polyline points="16 18 22 12 16 6"></polyline>
     <polyline points="8 6 2 12 8 18"></polyline>
   </svg>
 );
 
 const LaptopIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
     <line x1="8" y1="21" x2="16" y2="21"></line>
     <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -18,21 +38,51 @@ const LaptopIcon = () => (
 );
 
 const SmartphoneIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
     <line x1="12" y1="18" x2="12.01" y2="18"></line>
   </svg>
 );
 
 const TerminalIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <polyline points="4 17 10 11 4 5"></polyline>
     <line x1="12" y1="19" x2="20" y2="19"></line>
   </svg>
 );
 
 const DatabaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
     <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
     <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
@@ -40,7 +90,17 @@ const DatabaseIcon = () => (
 );
 
 const ShieldIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
   </svg>
 );
@@ -83,10 +143,9 @@ const ServiceCard = ({ title, description, icon: Icon, index, tags }) => {
     >
       {/* Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-500 "></div>
-      
+
       {/* Card Content */}
       <div className="relative h-full bg-neutral-900 rounded-xl p-4 border border-neutral-800 hover:border-cyan-400/50 transition-all duration-300 flex flex-col overflow-hidden">
-      
         {/* Floating particles - only show on hover */}
         {isHovered && (
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -97,7 +156,7 @@ const ServiceCard = ({ title, description, icon: Icon, index, tags }) => {
         )}
 
         {/* Icon Container */}
-                <div className="mb-4 relative z-10">
+        <div className="mb-4 relative z-10">
           <motion.div
             animate={{
               scale: isHovered ? 1.1 : 1,
@@ -106,21 +165,19 @@ const ServiceCard = ({ title, description, icon: Icon, index, tags }) => {
             transition={{ duration: 0.8 }}
             className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/10 to-teal-500/10 backdrop-blur-sm flex items-center justify-center border border-cyan-400/20 group-hover:border-cyan-400/50"
           >
-          
-            
-            
-
             {/* Icon with drop shadow */}
             <motion.div
               animate={{
-                filter: isHovered ? "drop-shadow(0 0 12px rgba(6, 182, 212, 0.8))" : "drop-shadow(0 0 0px rgba(6, 182, 212, 0))",
+                filter: isHovered
+                  ? "drop-shadow(0 0 12px rgba(6, 182, 212, 0.8))"
+                  : "drop-shadow(0 0 0px rgba(6, 182, 212, 0))",
               }}
               transition={{ duration: 0.3 }}
               className="text-cyan-400 relative z-10"
             >
               <Icon />
             </motion.div>
-          </motion.div>   
+          </motion.div>
         </div>
 
         {/* Title */}
@@ -168,42 +225,42 @@ const ServicesGrid = () => {
       icon: CodeIcon,
       description:
         "Building end-to-end web applications with modern technologies. Expertise in both frontend and backend development, from database design to user interfaces.",
-      tags: ["MERN", "MEAN", "Next.js", "WordPress"]
+      tags: ["MERN", "MEAN", "Next.js", "WordPress"],
     },
     {
       title: "UI/UX Developer",
       icon: LaptopIcon,
       description:
         "Creating intuitive and responsive user interfaces with a focus on user experience. Implementing modern design principles and ensuring accessibility.",
-      tags: ["Design", "Responsive", "A11y"]
+      tags: ["Design", "Responsive", "A11y"],
     },
     {
       title: "Mobile App Developer",
       icon: SmartphoneIcon,
       description:
         "Developing cross-platform mobile applications using React Native and Flutter. Creating seamless mobile experiences for iOS and Android platforms.",
-      tags: ["iOS", "Android", "Cross-platform"]
+      tags: ["iOS", "Android", "Cross-platform"],
     },
     {
       title: "Software Developer",
       icon: TerminalIcon,
       description:
         "Building robust and scalable software solutions. Expertise in system architecture, clean code practices, and software design patterns.",
-      tags: ["Architecture", "Patterns", "Scalable"]
+      tags: ["Architecture", "Patterns", "Scalable"],
     },
     {
       title: "Database Engineer",
       icon: DatabaseIcon,
       description:
         "Designing and implementing efficient databases using SQL Server, MySQL, and Oracle DB. Specializing in database optimization, query performance, and ensuring data integrity.",
-      tags: ["SQL", "Optimization", "Data"]
+      tags: ["SQL", "Optimization", "Data"],
     },
     {
       title: "Quality Assurance Engineer",
       icon: ShieldIcon,
       description:
         "Ensuring software quality through comprehensive testing strategies, including manual, automated, and performance testing across different platforms.",
-      tags: ["Testing", "Automation", "QA"]
+      tags: ["Testing", "Automation", "QA"],
     },
   ];
 
@@ -238,7 +295,6 @@ const ServicesGrid = () => {
           viewport={{ once: true }}
           className="text-center mb-6 sm:mb-8"
         >
-
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -267,7 +323,8 @@ const ServicesGrid = () => {
             viewport={{ once: true }}
             className="text-neutral-400 max-w-2xl mx-auto text-sm sm:text-base mt-6"
           >
-            Comprehensive software development solutions tailored to bring your ideas to life
+            Comprehensive software development solutions tailored to bring your
+            ideas to life
           </motion.p>
         </motion.div>
 
