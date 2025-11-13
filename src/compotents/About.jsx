@@ -1,10 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGraduationCap } from 'react-icons/fa';
+import { FaGraduationCap } from "react-icons/fa";
 import Profile from "../assets/Profile.jpg";
 
 const About = () => {
-
   return (
     <div id="about-me" className="w-full px-4 sm:px-6 md:px-8 mt-24">
       <motion.div
@@ -24,7 +23,8 @@ const About = () => {
           About{" "}
           <span
             style={{
-              background: "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
+              background:
+                "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               color: "transparent",
@@ -49,7 +49,8 @@ const About = () => {
             <div
               className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{
-                background: "linear-gradient(45deg, #0ea5e9, #06b6d4, #14b8a6, #0ea5e9)",
+                background:
+                  "linear-gradient(45deg, #0ea5e9, #06b6d4, #14b8a6, #0ea5e9)",
                 backgroundSize: "300% 300%",
                 animation: "gradientShift 4s ease infinite",
                 filter: "blur(25px)",
@@ -57,12 +58,13 @@ const About = () => {
                 zIndex: 0,
               }}
             />
-            
+
             {/* Outer border container with gradient */}
             <div
               className="absolute inset-0 rounded-2xl p-[3px] animate-border-glow"
               style={{
-                background: "linear-gradient(45deg, #0ea5e9, #06b6d4, #14b8a6, #0ea5e9)",
+                background:
+                  "linear-gradient(45deg, #0ea5e9, #06b6d4, #14b8a6, #0ea5e9)",
                 backgroundSize: "300% 300%",
                 animation: "gradientShift 4s ease infinite",
               }}
@@ -80,7 +82,7 @@ const About = () => {
                   boxShadow: "0 8px 32px rgba(6, 182, 212, 0.2)",
                 }}
               />
-              
+
               {/* Corner accents */}
               <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-cyan-400 rounded-tl-xl opacity-80"></div>
               <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-teal-400 rounded-tr-xl opacity-80"></div>
@@ -109,7 +111,19 @@ const About = () => {
               className="text-neutral-300 leading-relaxed text-sm lg:text-base"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
-              I am <span className="text-cyan-400 font-semibold">Buddhima Vilochana</span>, a Software Engineering undergraduate at SLIIT, passionate about technology, innovation, and creating impactful digital solutions. With hands-on experience in full-stack and mobile application development, I build scalable and user-centric systems using modern technologies such as ReactJS, NextJS, Angular, NodeJs, .NET, and PHP. I have professional experience as a Full Stack Developer at illumin-Labs and completed an internship at Nova Corp (Pvt) Ltd. I’m eager to explore emerging technologies and deliver innovative solutions.
+              I am{" "}
+              <span className="text-cyan-400 font-semibold">
+                Buddhima Vilochana
+              </span>
+              , a Software Engineering undergraduate at SLIIT, passionate about
+              technology, innovation, and creating impactful digital solutions.
+              With hands-on experience in full-stack and mobile application
+              development, I build scalable and user-centric systems using
+              modern technologies such as ReactJS, NextJS, Angular, NodeJs,
+              .NET, and PHP. I have professional experience as a Full Stack
+              Developer at illumin-Labs and completed an internship at Nova Corp
+              (Pvt) Ltd. I’m eager to explore emerging technologies and deliver
+              innovative solutions.
             </p>
           </div>
 

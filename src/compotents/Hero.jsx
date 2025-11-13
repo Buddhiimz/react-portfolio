@@ -52,7 +52,7 @@ const SequentialRoleDisplay = () => {
 
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
-    
+
     // Typing phase
     if (isTyping && charIndex < currentRole.length) {
       const timeout = setTimeout(() => {
@@ -60,7 +60,7 @@ const SequentialRoleDisplay = () => {
         setCharIndex(charIndex + 1);
       }, 100);
       return () => clearTimeout(timeout);
-    } 
+    }
     // Finished typing - start glitch after 2 seconds
     else if (isTyping && charIndex === currentRole.length) {
       const timeout = setTimeout(() => {
@@ -83,9 +83,9 @@ const SequentialRoleDisplay = () => {
   }, [charIndex, isTyping, isGlitching, currentRoleIndex]);
 
   return (
-    <div 
-    className="relative h-20 flex items-center justify-center lg:justify-start"
-    style={{marginTop:"-10px"}}
+    <div
+      className="relative h-20 flex items-center justify-center lg:justify-start"
+      style={{ marginTop: "-10px" }}
     >
       {/* Background scan lines */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
@@ -108,7 +108,7 @@ const SequentialRoleDisplay = () => {
         ))}
       </div>
 
-      <div className="relative flex flex-col items-center lg:items-start" >      
+      <div className="relative flex flex-col items-center lg:items-start">
         <div className="relative h-16 flex items-center min-w-[300px] lg:min-w-[400px]">
           <AnimatePresence mode="wait">
             {displayText && (
@@ -234,7 +234,7 @@ const SequentialRoleDisplay = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>        
+        </div>
       </div>
     </div>
   );
@@ -287,15 +287,14 @@ const Hero = () => {
             </motion.div>
 
             <motion.p
-  variants={container(0.4)}
-  initial="hidden"
-  animate="visible"
-  className="my-2 py-4 text-base lg:text-m text-center lg:text-left"
-  style={{ marginTop: "-10px", maxWidth: "45rem" }} // example custom width
->
-  {HERO_CONTENT}
-</motion.p>
-
+              variants={container(0.4)}
+              initial="hidden"
+              animate="visible"
+              className="my-2 py-4 text-base lg:text-m text-center lg:text-left"
+              style={{ marginTop: "-10px", maxWidth: "45rem" }} // example custom width
+            >
+              {HERO_CONTENT}
+            </motion.p>
 
             <motion.div
               variants={container(0.6)}

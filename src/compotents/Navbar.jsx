@@ -111,7 +111,7 @@ const Navbar = () => {
 
         {/* Desktop Contact Button */}
         <motion.button
-          whileHover={{ }}
+          whileHover={{}}
           whileTap={{ scale: 0.95 }}
           className="hidden xl:block"
           onClick={() => scrollToSection("contact")}
@@ -176,7 +176,7 @@ const Navbar = () => {
                   {item.name}
                 </motion.button>
               ))}
-              
+
               <motion.button
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}

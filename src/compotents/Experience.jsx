@@ -295,13 +295,12 @@ const Experience = () => {
     >
       {/* Work Experience Section */}
       <motion.div
-  initial={{ opacity: 0, y: -30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
-  className="text-center mb-6 sm:mb-8 mt-8 sm:mt-0"
->
-
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center mb-6 sm:mb-8 mt-8 sm:mt-0"
+      >
         <motion.h1
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: -50 }}
