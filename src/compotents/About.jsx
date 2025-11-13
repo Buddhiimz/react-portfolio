@@ -109,14 +109,7 @@ const About = () => {
               className="text-neutral-300 leading-relaxed text-sm lg:text-base"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
-              I am <span className="text-cyan-400 font-semibold">Buddhima Vilochana</span>, a Software Engineering undergraduate at
-              SLIIT, passionate about technology and innovation. Proficient in
-              full-stack development, mobile apps, and databases, I create
-              scalable, user-focused solutions using tools like React, Node.js,
-              Flutter, and MongoDB. My portfolio includes projects like MediCare,
-              FieldExpert, and OceanicCare, showcasing my ability to solve
-              real-world problems. I am eager to integrate AI/ML into my work and
-              continuously explore new technologies to drive innovation.
+              I am <span className="text-cyan-400 font-semibold">Buddhima Vilochana</span>, a Software Engineering undergraduate at SLIIT, passionate about technology, innovation, and creating impactful digital solutions. With hands-on experience in full-stack and mobile application development, I build scalable and user-centric systems using modern technologies such as ReactJS, NextJS, Angular, NodeJs, .NET, and PHP. I have professional experience as a Full Stack Developer at illumin-Labs and completed an internship at Nova Corp (Pvt) Ltd. I’m eager to explore emerging technologies and deliver innovative solutions.
             </p>
           </div>
 

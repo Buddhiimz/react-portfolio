@@ -7,7 +7,7 @@ import project6 from "../assets/projects/project-6.png";
 import project7 from "../assets/projects/project-7.png";
 import project8 from "../assets/projects/project-8.png";
 
-export const HERO_CONTENT = `I am a passionate full stack developer with a knack for crafting robust and scalable web applications. I have skills in front-end technologies like HTML and React.js, as well as back-end technologies like Node.js, MySQL, PHP, and MongoDB. My goal is to leverage my expertise to create innovative solutions that drive business growth and deliver exceptional user experiences.`;
+export const HERO_CONTENT = `I am a passionate Full Stack Developer with a strong focus on building robust, scalable, and user-friendly web applications. I’m skilled in front-end technologies like ReactJS, NextJS, and Angular, as well as back-end technologies such as Node.js, Express.js, .NET, and PHP. I also have experience with databases like MySQL, MSSQL, and MongoDB. My goal is to leverage my technical expertise to create innovative solutions that enhance performance, drive business growth, and deliver exceptional user experiences.`;
 
 
 export const PROJECTS = [
