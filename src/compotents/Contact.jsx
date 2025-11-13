@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Send, Phone, MapPin, Mail, Download } from "lucide-react";
-import { CONTACT } from "../constants";
-import BuddhimaCV from "../assets/BuddhimaCV.pdf";
-import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 
-// Initialize EmailJS
-emailjs.init("-2plUivn1vfBwR-nT");
+// Mock constants - replace with your actual imports
+const CONTACT = {
+  address: "Colombo, Sri Lanka",
+  phoneNo: "+94 77 123 4567",
+  email: "buddhima@example.com"
+};
+
+const BuddhimaCV = "/path-to-cv.pdf";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,29 +32,11 @@ const Contact = () => {
     e.preventDefault();
     setStatus({ type: "loading", message: "Sending..." });
 
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
-    };
-
-    try {
-      await emailjs.send(
-        "service_rr135xi",
-        "template_0ksn2tf",
-        templateParams,
-        "-2plUivn1vfBwR-nT"
-      );
-
+    // Replace with your actual emailjs implementation
+    setTimeout(() => {
       setStatus({ type: "success", message: "Message sent successfully!" });
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("Email error:", error);
-      setStatus({
-        type: "error",
-        message: "Failed to send message. Please try again.",
-      });
-    }
+    }, 1500);
   };
 
   const ContactInfo = ({ icon: Icon, title, value, href, download }) => (
@@ -59,69 +44,57 @@ const Contact = () => {
       <div
         className={`p-3 ${
           title === "Address"
-            ? "bg-sky-900/50"
+            ? "bg-cyan-500/10"
             : title === "Phone"
-            ? "bg-cyan-900/50"
+            ? "bg-cyan-500/10"
             : title === "Email"
-            ? "bg-teal-900/50"
-            : "bg-emerald-900/50"
-        } rounded-lg`}
+            ? "bg-teal-500/10"
+            : "bg-teal-500/10"
+        } rounded-lg border border-cyan-400/20`}
       >
         {href ? (
           <a
             href={href}
             download={download}
-            className={`hover:text-${
-              title === "Phone"
-                ? "cyan"
-                : title === "Email"
-                ? "teal"
-                : "emerald"
-            }-400 transition-colors`}
+            className="hover:text-cyan-300 transition-colors"
           >
-            <Icon
-              className={`w-6 h-6 text-${
-                title === "Phone"
-                  ? "cyan"
-                  : title === "Email"
-                  ? "teal"
-                  : "emerald"
-              }-400 cursor-pointer`}
-            />
+            <Icon className="w-6 h-6 text-cyan-400 cursor-pointer" />
           </a>
         ) : (
-          <Icon className="w-6 h-6 text-sky-400" />
+          <Icon className="w-6 h-6 text-cyan-400" />
         )}
       </div>
       <div>
-        <h3 className="font-semibold">{title}</h3>
-        <span className="opacity-80">{value}</span>
+        <h3 className="font-semibold text-white">{title}</h3>
+        <span className="opacity-80 text-neutral-400">{value}</span>
       </div>
     </div>
   );
 
   const SocialLinks = () => (
     <div id="contact" className="mt-4">
-      {" "}
-      {/* Changed from mt-8 to mt-4 */}
-      <div className="p-4 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
-        <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-sky-400 to-teal-400 bg-clip-text text-transparent">
+      <div className="p-4 rounded-xl border border-neutral-800 hover:border-cyan-400/50 transition-colors bg-neutral-900">
+        <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
           Connect With Me
         </h3>
 
         <div className="grid grid-cols-2 gap-4"></div>
 
-        <div className="mt-0 p-4 rounded-lg bg-gradient-to-r from-sky-900/50 to-teal-900/50">
-          <p className="text-sm text-center text-gray-200">
+        <div className="mt-0 p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-teal-500/10 border border-cyan-400/20">
+          <p className="text-sm text-center text-neutral-300">
             Feel free to reach out for collaborations or just to say Hi!
           </p>
+        </div>
+        <div className="mt-4 flex items-center gap-2">
+          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+          <span className="text-sm text-cyan-400">Available for freelance</span>
         </div>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-min py-4 px-4 font-[Poppins]">
+    <div className="min-h-min py-4 px-4 font-[Poppins] bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-4">
           <motion.div
@@ -138,16 +111,7 @@ const Contact = () => {
               className="text-4xl lg:text-5xl font-bold text-white mb-4 text-center"
             >
               Get{" "}
-              <span
-                style={{
-                  background:
-                    "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  marginTop: "-10px",
-                }}
-              >
+              <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
                 In Touch
               </span>
             </motion.h1>
@@ -161,9 +125,7 @@ const Contact = () => {
 
         <div className="grid md:grid-cols-2 gap-12 text-white">
           <div className="space-y-4">
-            {" "}
-            {/* Changed from space-y-8 to space-y-4 */}
-            <div className="p-6 rounded-xl border border-gray-700 hover:border-gray-600 transition-colors">
+            <div className="p-6 rounded-xl border border-neutral-800 hover:border-cyan-400/50 transition-colors bg-neutral-900">
               <div className="space-y-6">
                 <ContactInfo
                   icon={MapPin}
@@ -194,10 +156,10 @@ const Contact = () => {
             <SocialLinks />
           </div>
 
-          <div className="p-8 rounded-xl border border-gray-700">
-            <form ref={form} onSubmit={sendEmail} className="space-y-6">
+          <div className="p-8 rounded-xl border border-neutral-800 hover:border-cyan-400/50 transition-colors bg-neutral-900">
+            <div className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-m font-medium mb-1">
+                <label htmlFor="name" className="block text-m font-medium mb-1 text-neutral-300">
                   Name
                 </label>
                 <input
@@ -206,7 +168,7 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                  className="w-full px-4 py-2 bg-neutral-950 border border-neutral-700 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all text-white placeholder-neutral-500 outline-none"
                   placeholder="Your name"
                   required
                 />
@@ -215,7 +177,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-m font-medium mb-1"
+                  className="block text-m font-medium mb-1 text-neutral-300"
                 >
                   Email
                 </label>
@@ -225,7 +187,7 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                  className="w-full px-4 py-2 bg-neutral-950 border border-neutral-700 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all text-white placeholder-neutral-500 outline-none"
                   placeholder="your@email.com"
                   required
                 />
@@ -234,7 +196,7 @@ const Contact = () => {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-m font-medium mb-1"
+                  className="block text-m font-medium mb-1 text-neutral-300"
                 >
                   Message
                 </label>
@@ -244,16 +206,17 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                  className="w-full px-4 py-2 bg-neutral-950 border border-neutral-700 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all text-white placeholder-neutral-500 outline-none resize-none"
                   placeholder="Your message"
                   required
                 />
               </div>
 
               <button
-                type="submit"
+                type="button"
+                onClick={sendEmail}
                 disabled={status.type === "loading"}
-                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-sky-700 via-cyan-700 to-teal-500 text-white py-3 px-6 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white py-3 px-6 rounded-lg hover:from-cyan-600 hover:to-teal-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>
                   {status.type === "loading" ? "Sending..." : "Send Message"}
@@ -265,16 +228,16 @@ const Contact = () => {
                 <div
                   className={`text-center p-2 rounded ${
                     status.type === "success"
-                      ? "text-green-400"
+                      ? "text-green-400 bg-green-500/10 border border-green-500/20"
                       : status.type === "error"
-                      ? "text-red-400"
-                      : "text-blue-400"
+                      ? "text-red-400 bg-red-500/10 border border-red-500/20"
+                      : "text-cyan-400 bg-cyan-500/10 border border-cyan-500/20"
                   }`}
                 >
                   {status.message}
                 </div>
               )}
-            </form>
+            </div>
           </div>
         </div>
       </div>

@@ -242,26 +242,18 @@ const SequentialRoleDisplay = () => {
 
 const Hero = () => {
   return (
-    <div
-      id="home"
-      className="relative px-4 lg:px-0 max-w-screen overflow-hidden"
-    >
-      <div
-        className="flex flex-col-reverse lg:flex-row flex-wrap"
-        style={{ marginTop: "150px" }}
-      >
+    <div id="home" className="relative px-4 lg:px-0 max-w-screen overflow-hidden" >
+      <div className="flex flex-col-reverse lg:flex-row flex-wrap"
+        style={{ marginTop: "150px" }} >
         {/* Content Section */}
         <div className="w-full lg:w-3/5 mb-8 lg:mb-0">
-          <div
-            className="flex flex-col items-center lg:items-start lg:ml-28 "
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-          >
+          <div className="flex flex-col items-center lg:items-start lg:ml-28 "
+            style={{ fontFamily: "'Poppins', sans-serif" }} >
             <motion.h1
               variants={container2}
               initial="hidden"
               animate="visible"
-              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left "
-            >
+              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left " >
               {name.split("").map((char, index) => (
                 <motion.span key={index} variants={letter} className="mr-0.5">
                   {char === " " ? (
@@ -291,8 +283,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               className="my-2 py-4 text-base lg:text-m text-center lg:text-left"
-              style={{ marginTop: "-10px", maxWidth: "45rem" }} // example custom width
-            >
+              style={{ marginTop: "-10px", maxWidth: "45rem" }} >
               {HERO_CONTENT}
             </motion.p>
 
@@ -305,8 +296,7 @@ const Hero = () => {
                 border: "2px solid rgba(6, 182, 212, 0.6)",
                 boxShadow:
                   "0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)",
-              }}
-            >
+              }}>
               {/* Electric effect overlays */}
               <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
                 <div
@@ -328,60 +318,52 @@ const Hero = () => {
               </style>
 
               {/* Social Links */}
-              <a
-                href="https://www.linkedin.com/in/buddhiimz"
+              <a href="https://www.linkedin.com/in/buddhiimz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10"
-              >
+                className="group relative z-10">
+
                 <div className="relative">
                   <FaLinkedin className="text-3xl lg:text-4xl text-cyan-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a
-                href="https://github.com/Buddhiimz"
+              <a href="https://github.com/Buddhiimz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10"
-              >
+                className="group relative z-10" >
+
                 <div className="relative">
                   <FaGithub className="text-3xl lg:text-4xl text-neutral-300 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a
-                href="https://instagram.com/buddhimxx"
+              <a href="https://instagram.com/buddhimxx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10"
-              >
+                className="group relative z-10" >
                 <div className="relative">
                   <FaInstagram className="text-3xl lg:text-4xl text-teal-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a
-                href="https://fb.com/ag buddhima"
+              <a href="https://fb.com/ag buddhima"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10"
-              >
+                className="group relative z-10" >
                 <div className="relative">
                   <FaFacebookSquare className="text-3xl lg:text-4xl text-cyan-500 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a
-                href="#"
+              <a href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10"
-              >
+                className="group relative z-10" >
                 <div className="relative">
                   <RiTwitterXFill className="text-3xl lg:text-4xl text-neutral-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
