@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HERO_CONTENT } from "../constants/index.js";
 import ProfilePic2 from "../assets/Profile2.png";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaLinkedin,
   FaGithub,
@@ -12,17 +12,15 @@ import { RiTwitterXFill } from "react-icons/ri";
 
 const name = "Buddhima Vilochana";
 
-// Variants for container to stagger children
 const container2 = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.05, // delay between letters
+      staggerChildren: 0.05,
     },
   },
 };
 
-// Variants for each letter
 const letter = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -38,74 +36,206 @@ const container = (delay) => ({
 });
 
 const roles = [
-  "Software Engineer",
-  "Full Stack Developer",
-  "Mobile Application Developer",
-  "UI/UX Developer",
+  "I'm a Mobile Application Developer",
+  "I'm a Software Engineer",
+  "I'm a Full Stack Developer",
+  "I'm a UI/UX Developer",
 ];
 
-const Typewriter = () => {
-  const [text, setText] = useState("");
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [speed, setSpeed] = useState(150);
+// Sequential Glitchy Role Display
+const SequentialRoleDisplay = () => {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+  const [isGlitching, setIsGlitching] = useState(false);
+  const [charIndex, setCharIndex] = useState(0);
 
   useEffect(() => {
-    const handleTyping = () => {
-      const currentRole = roles[roleIndex];
-
-      if (isDeleting) {
-        setText((prev) => prev.slice(0, prev.length - 1));
-        setSpeed(100);
-        if (text === "") {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      } else {
-        setText((prev) => currentRole.slice(0, prev.length + 1));
-        setSpeed(150);
-        if (text === currentRole) {
-          setIsDeleting(true);
-          setSpeed(1000);
-        }
-      }
-    };
-
-    const timer = setTimeout(handleTyping, speed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, speed, roleIndex]);
-
-  const containerStyle = {
-    fontSize: "2rem",
-    fontWeight: "bold",
-    fontFamily: "'Poppins', sans-serif",
-    color: "transparent",
-    background: "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
-    WebkitBackgroundClip: "text",
-    backgroundClip: "text",
-    display: "inline-block",
-  };
-
-  const cursorStyle = {
-    display: "inline-block",
-    width: "1ch",
-    backgroundColor: "currentColor",
-    animation: "blink 1s steps(2, start) infinite",
-  };
+    const currentRole = roles[currentRoleIndex];
+    
+    // Typing phase
+    if (isTyping && charIndex < currentRole.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    } 
+    // Finished typing - start glitch after 2 seconds
+    else if (isTyping && charIndex === currentRole.length) {
+      const timeout = setTimeout(() => {
+        setIsTyping(false);
+        setIsGlitching(true);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+    // Glitching phase - disappear after 1 second
+    else if (isGlitching) {
+      const timeout = setTimeout(() => {
+        setIsGlitching(false);
+        setDisplayText("");
+        setCharIndex(0);
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+        setIsTyping(true);
+      }, 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [charIndex, isTyping, isGlitching, currentRoleIndex]);
 
   return (
-    <div style={{ textAlign: "center", marginTop: "0px" }}>
-      <style>
-        {`
-          @keyframes blink {
-            50% { opacity: 0; }
-          }
-        `}
-      </style>
-      <motion.div variants={container(0.2)} initial="hidden" animate="visible">
-        <span style={containerStyle}>I'm a {text}</span>
-        <span style={cursorStyle}>|</span>
-      </motion.div>
+    <div 
+    className="relative h-20 flex items-center justify-center lg:justify-start"
+    style={{marginTop:"-10px"}}
+    >
+      {/* Background scan lines */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+            style={{ top: `${25 + i * 25}%`, left: 0, right: 0 }}
+            animate={{
+              x: ["-100%", "100%"],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative flex flex-col items-center lg:items-start" >      
+        <div className="relative h-16 flex items-center min-w-[300px] lg:min-w-[400px]">
+          <AnimatePresence mode="wait">
+            {displayText && (
+              <motion.div
+                key={currentRoleIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="relative w-full"
+              >
+                {/* Glitch effect layers - only show when glitching */}
+                {isGlitching && (
+                  <>
+                    <motion.div
+                      className="absolute inset-0 text-3xl lg:text-4xl font-bold"
+                      style={{
+                        color: "#22d3ee",
+                        textShadow: "-3px 0 #0ea5e9",
+                      }}
+                      animate={{
+                        x: [-2, 2, -2, 3, -1],
+                        y: [1, -1, 2, -2, 1],
+                      }}
+                      transition={{
+                        duration: 0.2,
+                        repeat: Infinity,
+                      }}
+                    >
+                      {displayText}
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0 text-3xl lg:text-4xl font-bold"
+                      style={{
+                        color: "#14b8a6",
+                        textShadow: "3px 0 #06b6d4",
+                      }}
+                      animate={{
+                        x: [2, -2, 3, -3, 1],
+                        y: [-1, 1, -2, 2, -1],
+                      }}
+                      transition={{
+                        duration: 0.2,
+                        repeat: Infinity,
+                      }}
+                    >
+                      {displayText}
+                    </motion.div>
+                  </>
+                )}
+
+                {/* Main text with letter-by-letter animation */}
+                <h2 className="relative text-3xl lg:text-4xl font-bold">
+                  {displayText.split("").map((char, index) => (
+                    <motion.span
+                      key={`${currentRoleIndex}-${index}`}
+                      initial={{ opacity: 0, y: -20, scale: 0 }}
+                      animate={
+                        isGlitching
+                          ? {
+                              opacity: [1, 0, 1, 0, 1, 0],
+                              scale: [1, 1.2, 0.8, 1.3, 0.9, 0],
+                              filter: [
+                                "blur(0px)",
+                                "blur(2px)",
+                                "blur(0px)",
+                                "blur(3px)",
+                                "blur(1px)",
+                                "blur(5px)",
+                              ],
+                            }
+                          : {
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                            }
+                      }
+                      transition={
+                        isGlitching
+                          ? { duration: 0.8, ease: "easeInOut" }
+                          : { duration: 0.3, delay: index * 0.05 }
+                      }
+                      style={{
+                        background:
+                          "linear-gradient(to right, #0ea5e9, #06b6d4, #14b8a6)",
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        color: "transparent",
+                        display: "inline-block",
+                      }}
+                    >
+                      {char === " " ? "\u00A0" : char}
+                    </motion.span>
+                  ))}
+                </h2>
+
+                {/* Cursor - only show when typing */}
+                {/* {isTyping && (
+                  <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="inline-block w-0.5 h-8 bg-gradient-to-b from-cyan-400 to-teal-400 ml-1"
+                  />
+                )} */}
+
+                {/* Scanline effect during glitch */}
+                {isGlitching && (
+                  <motion.div
+                    className="absolute inset-0 h-full w-full pointer-events-none"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, transparent 0%, rgba(6, 182, 212, 0.3) 50%, transparent 100%)",
+                    }}
+                    animate={{
+                      y: ["-100%", "100%"],
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      repeat: 2,
+                      ease: "linear",
+                    }}
+                  />
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>        
+      </div>
     </div>
   );
 };
@@ -123,22 +253,20 @@ const Hero = () => {
         {/* Content Section */}
         <div className="w-full lg:w-3/5 mb-8 lg:mb-0">
           <div
-            className="flex flex-col items-center lg:items-start lg:ml-28"
+            className="flex flex-col items-center lg:items-start lg:ml-28 "
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             <motion.h1
               variants={container2}
               initial="hidden"
               animate="visible"
-              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left"
+              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left "
             >
               {name.split("").map((char, index) => (
                 <motion.span key={index} variants={letter} className="mr-0.5">
                   {char === " " ? (
                     <>
-                      {/* Hide line break on large screens */}
                       <span className="hidden lg:inline">&nbsp;</span>
-                      {/* Show line break on mobile */}
                       <br className="lg:hidden" />
                     </>
                   ) : (
@@ -148,13 +276,22 @@ const Hero = () => {
               ))}
             </motion.h1>
 
-            <Typewriter />
+            {/* Sequential Glitchy Role Display */}
+            <motion.div
+              variants={container(0.2)}
+              initial="hidden"
+              animate="visible"
+              className="w-full "
+            >
+              <SequentialRoleDisplay />
+            </motion.div>
 
             <motion.p
               variants={container(0.4)}
               initial="hidden"
               animate="visible"
               className="my-2 max-w-xl py-4 text-base lg:text-lg text-center lg:text-left"
+              style={{marginTop:"-10px"}}
             >
               {HERO_CONTENT}
             </motion.p>
@@ -190,8 +327,7 @@ const Hero = () => {
                 `}
               </style>
 
-              {/* LinkedIn */}
-
+              {/* Social Links */}
               <a
                 href="https://www.linkedin.com/in/buddhiimz"
                 target="_blank"
@@ -203,8 +339,6 @@ const Hero = () => {
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
-
-              {/* GitHub */}
 
               <a
                 href="https://github.com/Buddhiimz"
@@ -218,19 +352,17 @@ const Hero = () => {
                 </div>
               </a>
 
-              {/* Instagram */}
-
-              <a href="https://instagram.com/buddhimxx"
+              <a
+                href="https://instagram.com/buddhimxx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10" >
+                className="group relative z-10"
+              >
                 <div className="relative">
                   <FaInstagram className="text-3xl lg:text-4xl text-teal-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
-
-              {/* Facebook */}
 
               <a
                 href="https://fb.com/ag buddhima"
@@ -243,8 +375,6 @@ const Hero = () => {
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
-
-              {/* Twitter/X */}
 
               <a
                 href="#"
@@ -261,7 +391,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Image Section - Now first on mobile */}
+        {/* Image Section */}
         <div className="w-full lg:w-2/5 flex justify-center lg:justify-end mb-8 lg:mb-0 lg:p-8">
           <motion.img
             initial={{ x: 100, opacity: 0 }}
@@ -280,7 +410,7 @@ const Hero = () => {
         </div>
         <style>
           {`
-            @media (min-width: 1024px) { /* lg breakpoint */
+            @media (min-width: 1024px) {
               img[alt="Buddhima"] {
                 margin-right: 110px !important;
               }
@@ -294,7 +424,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className=" absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-neutral-500 "
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-neutral-500"
       >
         <span className="text-xs uppercase tracking-wider">Scroll Down</span>
         <motion.div
