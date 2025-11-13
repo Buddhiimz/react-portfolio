@@ -103,7 +103,12 @@ const PROJECTS = [
     description:
       "Developed a web application to help farmers manage their agricultural data, such as crop records, pest and disease information. Implemented a Sales and Distribution function to streamline the sales process and enhance distribution efficiency.",
     image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
-    technologies: ["MERN Stack Technology", "Tailwind CSS", "ChartJs" , "EmailJS"],
+    technologies: [
+      "MERN Stack Technology",
+      "Tailwind CSS",
+      "ChartJs",
+      "EmailJS",
+    ],
     link: "https://github.com/Y3-S1-project-group",
     category: "Web Development",
   },
@@ -113,7 +118,12 @@ const PROJECTS = [
     description:
       "Developed a full-stack web application using the MERN stack to manage medical tasks such as patient records, appointments, and prescriptions. Implemented an Appointment Management function that allows users to view available times for doctors upon selection, enhancing scheduling efficiency.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
-    technologies: ["MERN Stack Technology", "Tailwind CSS", "ChartJs" , "EmailJS"],
+    technologies: [
+      "MERN Stack Technology",
+      "Tailwind CSS",
+      "ChartJs",
+      "EmailJS",
+    ],
     link: "https://github.com/Y3-S1-project-group",
     category: "Web Development",
   },
@@ -355,7 +365,9 @@ const Projects = () => {
                   <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
                     <div className="flex items-center gap-2 text-neutral-500 text-xs">
                       <FaCode className="text-cyan-400" />
-                      <span>Open Source</span>
+                      <span>
+                        {project.id <= 3 ? "Client Project" : "Open Source"}
+                      </span>
                     </div>
                     <motion.a
                       href={project.link}
