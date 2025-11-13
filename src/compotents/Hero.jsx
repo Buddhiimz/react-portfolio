@@ -183,11 +183,11 @@ const Hero = () => {
               </div>
               <style>
                 {`
-      @keyframes electric-flow {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-      }
-    `}
+                  @keyframes electric-flow {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                  }
+                `}
               </style>
 
               {/* LinkedIn */}
@@ -220,12 +220,10 @@ const Hero = () => {
 
               {/* Instagram */}
 
-              <a
-                href="https://instagram.com/buddhimxx"
+              <a href="https://instagram.com/buddhimxx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10"
-              >
+                className="group relative z-10" >
                 <div className="relative">
                   <FaInstagram className="text-3xl lg:text-4xl text-teal-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
@@ -290,6 +288,23 @@ const Hero = () => {
           `}
         </style>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className=" absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-neutral-500 "
+      >
+        <span className="text-xs uppercase tracking-wider">Scroll Down</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="w-6 h-10 rounded-full border-2 border-cyan-400/30 flex items-start justify-center p-2"
+        >
+          <motion.div className="w-1 h-2 bg-cyan-400 rounded-full" />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

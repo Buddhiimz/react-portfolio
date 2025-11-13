@@ -57,7 +57,7 @@ const App = () => {
       <main className="pt-[80px]">
         <section id="home"><Home /></section>
         <section id="about-me"><AboutMe /></section>
-        <section id="tech"><Tech /></section>
+        {/* <section id="tech"><Tech /></section> */}
         <section id="Experience"><Experience /></section>
         <section id="project"><Project /></section>
         <section id="services"><Services /></section>

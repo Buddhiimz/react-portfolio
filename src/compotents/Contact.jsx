@@ -121,15 +121,15 @@ const Contact = () => {
   );
 
   return (
-    <div className="min-h-min py-12 px-4 font-[Poppins]">
+    <div className="min-h-min py-4 px-4 font-[Poppins]">
       <div className="max-w-6xl mx-auto">
-        <div className="space-y-4 mb-12">
+        <div className="space-y-4 mb-4">
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-6"
+            className="text-center mb-4"
           >
             <motion.h1
               whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ const Contact = () => {
                 In Touch
               </span>
             </motion.h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full mt-2"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
           </motion.div>
 
           <p className="text-center max-w-2xl mx-auto text-neutral-400">
