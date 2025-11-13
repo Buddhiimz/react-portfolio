@@ -6,6 +6,9 @@ import {
   FaCode,
   FaLayerGroup,
 } from "react-icons/fa";
+import FProject1 from "../assets/projects/FProject1.png";
+import FProject2 from "../assets/projects/FProject2.png";
+import FProject3 from "../assets/projects/FProject3.png";
 
 // Your projects data
 const PROJECTS = [
@@ -14,7 +17,7 @@ const PROJECTS = [
     title: "Planet First Web Application",
     description:
       "Developed an eco-focused web platform to promote sustainable living and user engagement. Built and deployed a Carbon Footprint Calculator, enabling 200+ users to track sustainability. Integrated PHPMailer for contact form and FPDF for automated PDF report generation.",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800",
+    image: FProject1,
     technologies: [
       "HTML",
       "Bootstrap",
@@ -31,7 +34,7 @@ const PROJECTS = [
     title: "illumin-labs Portfolio Web Application",
     description:
       "Developed a responsive portfolio website with modern UI/UX using React and Tailwind CSS. Implemented project showcase, smooth animations, and integrated contact form with EmailJS. Improved Lighthouse performance score by 20% through image compression.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+    image: FProject2,
     technologies: [
       "ReactJS",
       "Tailwind CSS",
@@ -47,7 +50,7 @@ const PROJECTS = [
     title: "GreenGleam Cleaning Platform",
     description:
       "Built a booking management platform with flexible scheduling, real-time validation, and checkout integration, enabling 100+ users to book services with a 99% success rate. Implemented service-type-based discount logic and integrated Google Review widget for customer feedback.",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800",
+    image: FProject3,
     technologies: [
       "HTML",
       "PHP",
