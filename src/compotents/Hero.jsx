@@ -290,7 +290,7 @@ const Hero = () => {
               variants={container(0.4)}
               initial="hidden"
               animate="visible"
-              className="my-2 max-w-2xl py-4 text-base lg:text-m text-center lg:text-left border"
+              className="my-2 max-w-2xl py-4 text-base lg:text-m text-center lg:text-left"
               style={{marginTop:"-10px"}}
             >
               {HERO_CONTENT}
