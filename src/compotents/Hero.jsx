@@ -287,14 +287,15 @@ const Hero = () => {
             </motion.div>
 
             <motion.p
-              variants={container(0.4)}
-              initial="hidden"
-              animate="visible"
-              className="my-2 max-w-2xl py-4 text-base lg:text-m text-center lg:text-left"
-              style={{marginTop:"-10px"}}
-            >
-              {HERO_CONTENT}
-            </motion.p>
+  variants={container(0.4)}
+  initial="hidden"
+  animate="visible"
+  className="my-2 py-4 text-base lg:text-m text-center lg:text-left"
+  style={{ marginTop: "-10px", maxWidth: "45rem" }} // example custom width
+>
+  {HERO_CONTENT}
+</motion.p>
+
 
             <motion.div
               variants={container(0.6)}
