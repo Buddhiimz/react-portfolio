@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 // Mock constants - replace with your actual imports
 const CONTACT = {
-  address: "Colombo, Sri Lanka",
-  phoneNo: "+94 77 123 4567",
-  email: "buddhima@example.com"
+  address: "Malabe, Sri Lanka",
+  phoneNo: "+94 76 583 1021",
+  email: "agbvilochana@gmail.com"
 };
 
 const BuddhimaCV = "/path-to-cv.pdf";
