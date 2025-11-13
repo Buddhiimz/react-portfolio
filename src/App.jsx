@@ -4,9 +4,10 @@ import AboutMe from "./pages/AboutMe";
 import Tech from "./pages/Tech";
 import Project from "./pages/Project";
 import Contacts from "./pages/Contacts";
-import Services from "./compotents/Services"; // Fixed typo in filename
-import Navbar from "./compotents/Navbar"; // Import Navbar
+import Services from "./compotents/Services"; 
+import Navbar from "./compotents/Navbar";
 import Experience from "./pages/Experience";
+import Footer from "./compotents/footer";
 
 const App = () => {
   return (
@@ -62,6 +63,8 @@ const App = () => {
         <section id="project"><Project /></section>
         <section id="services"><Services /></section>
         <section id="contacts"><Contacts /></section>
+        <Footer />
+        
       </main>
     </div>
   );

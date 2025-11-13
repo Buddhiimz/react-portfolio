@@ -111,7 +111,7 @@ const Contact = () => {
   );
 
   const SocialLinks = () => (
-    <div id="contact" className="mt-4">
+    <div className="mt-4">
       <div className="p-4 rounded-xl border border-neutral-800 hover:border-cyan-400/50 transition-colors bg-neutral-900">
         <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
           Connect With Me
@@ -133,7 +133,8 @@ const Contact = () => {
   );
 
   return (
-    <div className="min-h-min py-4 px-4 font-sans bg-neutral-950">
+    <div id="contact" className="min-h-min py-4 px-4 mb-4 font-sans"
+    style={{ fontFamily: "'Poppins', sans-serif" }}>
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-4">
           <div className="text-center mb-4">
