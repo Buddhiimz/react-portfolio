@@ -210,7 +210,7 @@ const Projects = () => {
   return (
     <div
       id="project"
-      className="px-4 sm:px-6 lg:px-8 relative overflow-hidden py-10"
+      className="px-4 sm:px-6 lg:px-8 relative overflow-hidden py-4 sm:py-8"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Header Section */}
@@ -247,7 +247,7 @@ const Projects = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12 relative z-10"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-6 relative z-10"
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => (

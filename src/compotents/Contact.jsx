@@ -133,8 +133,8 @@ const Contact = () => {
   );
 
   return (
-    <div id="contact" className="min-h-min py-8 px-4 mb-4 font-sans"
-    style={{ fontFamily: "'Poppins', sans-serif", marginTop:"50px" }}>
+    <div id="contact" className="min-h-min py-4 px-4 mb-4 font-sans mt-28"
+    style={{ fontFamily: "'Poppins', sans-serif", marginTop:"60px" }}>
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-4">
           <div className="text-center mb-4">

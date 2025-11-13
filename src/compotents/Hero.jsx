@@ -243,7 +243,7 @@ const AnimatedStats = () => {
       variants={container(0.4)}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-3 gap-4 my-8 max-w-2xl"
+      className="grid grid-cols-3 gap-2 sm:gap-4 my-2 max-w-2xl w-full px-2 sm:px-4"
     >
       {stats.map((stat, index) => (
         <motion.div
@@ -253,18 +253,21 @@ const AnimatedStats = () => {
           transition={{ delay: 0.6 + index * 0.1, type: "spring" }}
           className="relative group"
         >
-          <div className="text-center p-4 rounded-lg border border-cyan-400/30 bg-cyan-400/5 backdrop-blur-sm hover:border-cyan-400/60 transition-all duration-300">
+          <div className="text-center p-2 sm:p-4 rounded-lg border border-cyan-400/30 bg-cyan-400/5 backdrop-blur-sm hover:border-cyan-400/60 transition-all duration-300">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 + index * 0.1 }}
-              className="text-3xl lg:text-4xl font-bold bg-gradient-to-r text-white from-cyan-400 to-teal-400 bg-clip-text text-transparent"
+              className="text-xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r text-white from-cyan-400 to-teal-400 bg-clip-text text-transparent"
             >
-              {stat.value}{stat.suffix}
+              {stat.value}
+              {stat.suffix}
             </motion.div>
-            <div className="text-sm text-neutral-400 mt-2">{stat.label}</div>
+            <div className="text-xs sm:text-sm text-neutral-400 mt-1 sm:mt-2">
+              {stat.label}
+            </div>
           </div>
-          
+
           {/* Hover glow effect */}
           <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-teal-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10" />
         </motion.div>
@@ -275,18 +278,26 @@ const AnimatedStats = () => {
 
 const Hero = () => {
   return (
-    <div id="home" className="relative px-4 lg:px-0 max-w-screen overflow-hidden" >
-      <div className="flex flex-col-reverse lg:flex-row flex-wrap"
-        style={{ marginTop: "150px" }} >
+    <div
+      id="home"
+      className="relative px-4 lg:px-0 max-w-screen overflow-hidden"
+    >
+      <div
+        className="flex flex-col-reverse lg:flex-row flex-wrap"
+        style={{ marginTop: "150px" }}
+      >
         {/* Content Section */}
         <div className="w-full lg:w-3/5 mb-8 lg:mb-0">
-          <div className="flex flex-col items-center lg:items-start lg:ml-28 "
-            style={{ fontFamily: "'Poppins', sans-serif" }} >
+          <div
+            className="flex flex-col items-center lg:items-start lg:ml-28 "
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
             <motion.h1
               variants={container2}
               initial="hidden"
               animate="visible"
-              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left " >
+              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left "
+            >
               {name.split("").map((char, index) => (
                 <motion.span key={index} variants={letter} className="mr-0.5">
                   {char === " " ? (
@@ -318,14 +329,15 @@ const Hero = () => {
               variants={container(0.6)}
               initial="hidden"
               animate="visible"
-              className="relative flex w-full lg:w-3/5 items-center justify-center gap-4 mt-8 lg:mt-5 lg:ml-10 rounded-lg p-4"
+              className="relative flex w-full lg:w-3/5 items-center justify-center gap-4 mt-6 lg:mt-8 lg:ml-10 rounded-lg p-4"
               style={{
                 border: "2px solid rgba(6, 182, 212, 0.6)",
                 boxShadow:
                   "0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)",
-              }}>
+              }}
+            >
               {/* Electric effect overlays */}
-              <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none ">
                 <div
                   className="absolute inset-0"
                   style={{
@@ -345,52 +357,60 @@ const Hero = () => {
               </style>
 
               {/* Social Links */}
-              <a href="https://www.linkedin.com/in/buddhiimz"
+              <a
+                href="https://www.linkedin.com/in/buddhiimz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10">
-
+                className="group relative z-10"
+              >
                 <div className="relative">
                   <FaLinkedin className="text-3xl lg:text-4xl text-cyan-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a href="https://github.com/Buddhiimz"
+              <a
+                href="https://github.com/Buddhiimz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10" >
-
+                className="group relative z-10"
+              >
                 <div className="relative">
                   <FaGithub className="text-3xl lg:text-4xl text-neutral-300 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a href="https://instagram.com/buddhimxx"
+              <a
+                href="https://instagram.com/buddhimxx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10" >
+                className="group relative z-10"
+              >
                 <div className="relative">
                   <FaInstagram className="text-3xl lg:text-4xl text-teal-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a href="https://fb.com/ag buddhima"
+              <a
+                href="https://fb.com/ag buddhima"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10" >
+                className="group relative z-10"
+              >
                 <div className="relative">
                   <FaFacebookSquare className="text-3xl lg:text-4xl text-cyan-500 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
                 </div>
               </a>
 
-              <a href="#"
+              <a
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative z-10" >
+                className="group relative z-10"
+              >
                 <div className="relative">
                   <RiTwitterXFill className="text-3xl lg:text-4xl text-neutral-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                   <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>

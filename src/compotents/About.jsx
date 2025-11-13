@@ -5,7 +5,7 @@ import Profile from "../assets/Profile.jpg";
 
 const About = () => {
   return (
-    <div id="about-me" className="w-full px-4 sm:px-6 md:px-8 mt-28">
+    <div id="about-me" className="w-full px-4 sm:px-6 md:px-8 mt-20 sm:mt-28">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}

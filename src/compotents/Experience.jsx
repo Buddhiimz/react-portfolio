@@ -77,7 +77,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className="relative px-4 sm:px-6 md:px-12 lg:px-28 pt-12 sm:pt-16 lg:pt-20 max-w-screen overflow-hidden mt-12"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-28 pt-8 sm:pt-16 lg:pt-20 max-w-screen overflow-hidden mt-12"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Work Experience Section */}

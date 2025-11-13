@@ -277,7 +277,7 @@ const ServicesGrid = () => {
   return (
     <div
       id="services"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden mt-2 lg:mt-8"
       style={{ fontFamily: "'Poppins', sans-serif", marginTop:"40px" }}
     >
       {/* Background Decorative Elements */}
