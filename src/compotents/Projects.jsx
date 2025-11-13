@@ -11,6 +11,56 @@ import {
 const PROJECTS = [
   {
     id: 1,
+    title: "Planet First Web Application",
+    description:
+      "Developed an eco-focused web platform to promote sustainable living and user engagement. Built and deployed a Carbon Footprint Calculator, enabling 200+ users to track sustainability. Integrated PHPMailer for contact form and FPDF for automated PDF report generation.",
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800",
+    technologies: [
+      "HTML",
+      "Bootstrap",
+      "PHP",
+      "JavaScript",
+      "PHPMailer",
+      "FPDF",
+    ],
+    link: "https://theplanetfirst.org/",
+    category: "AI & Web Development",
+  },
+  {
+    id: 2,
+    title: "illumin-labs Portfolio Web Application",
+    description:
+      "Developed a responsive portfolio website with modern UI/UX using React and Tailwind CSS. Implemented project showcase, smooth animations, and integrated contact form with EmailJS. Improved Lighthouse performance score by 20% through image compression.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+    technologies: [
+      "ReactJS",
+      "Tailwind CSS",
+      "JavaScript",
+      "EmailJS",
+      "Framer Motion",
+    ],
+    link: "https://illuminlabs.net/",
+    category: "Full Stack Development",
+  },
+  {
+    id: 3,
+    title: "GreenGleam Cleaning Platform",
+    description:
+      "Built a booking management platform with flexible scheduling, real-time validation, and checkout integration, enabling 100+ users to book services with a 99% success rate. Implemented service-type-based discount logic and integrated Google Review widget for customer feedback.",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800",
+    technologies: [
+      "HTML",
+      "PHP",
+      "JavaScript",
+      "MySQL",
+      "Bootstrap",
+      "WordPress",
+    ],
+    link: "https://greengleam.com.au/",
+    category: "Web Development",
+  },
+  {
+    id: 4,
     title: "Orchid Species Identification System",
     description:
       "Developed a deep learning–based web application capable of identifying 52 orchid species from uploaded images. Integrated CNN model (InceptionV3) using transfer learning for high accuracy and real-time predictions. Built an Angular frontend for interactive image uploads and result visualization.",
@@ -27,7 +77,7 @@ const PROJECTS = [
     category: "AI & Web Development",
   },
   {
-    id: 2,
+    id: 5,
     title: "Restaurant Management Service – Food Delivery System",
     description:
       "Developed a microservice-based food delivery platform with restaurant registration, menu management, and role-based access. Implemented owner-level logic, admin approval workflows, and an API Gateway for service routing. Built the frontend using React & Tailwind CSS, and performed end-to-end testing with Cypress.",
@@ -45,7 +95,7 @@ const PROJECTS = [
     category: "Full Stack Development",
   },
   {
-    id: 3,
+    id: 6,
     title: "FieldExpert - Farm Management System",
     description:
       "Developed a web application to help farmers manage their agricultural data, such as crop records, pest and disease information. Implemented a Sales and Distribution function to streamline the sales process and enhance distribution efficiency.",
@@ -55,7 +105,7 @@ const PROJECTS = [
     category: "Web Development",
   },
   {
-    id: 4,
+    id: 7,
     title: "MediCare - Hospital Management Web Application",
     description:
       "Developed a full-stack web application using the MERN stack to manage medical tasks such as patient records, appointments, and prescriptions. Implemented an Appointment Management function that allows users to view available times for doctors upon selection, enhancing scheduling efficiency.",
@@ -65,7 +115,7 @@ const PROJECTS = [
     category: "Web Development",
   },
   {
-    id: 5,
+    id: 8,
     title: "OceanicCare - Mobile Application",
     description:
       "Developed a mobile application focused on marine conservation, featuring functionalities such as a Marine Life Encyclopedia, Beach Cleanup Events, Sustainable Seafood Guide, and Ocean Pollution.",
@@ -75,7 +125,7 @@ const PROJECTS = [
     category: "Mobile Development",
   },
   {
-    id: 6,
+    id: 9,
     title: "Angular Login System",
     description:
       "Developed a full-stack web application with an Angular frontend featuring user registration, login, dashboard, and password recovery modules. Implemented a secure .NET backend using JWT authentication and password hashing. Designed and optimized an MSSQL database with stored procedures for efficient data management.",
@@ -157,7 +207,7 @@ const Projects = () => {
   return (
     <div
       id="project"
-      className="px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="px-4 sm:px-6 lg:px-8 relative overflow-hidden py-10"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Header Section */}
@@ -175,7 +225,7 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Academic{" "}
+          Featured{" "}
           <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
             Projects
           </span>
@@ -236,26 +286,30 @@ const Projects = () => {
                     animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
                     className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent flex items-center justify-center gap-4"
                   >
-                    <motion.a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 bg-cyan-400 rounded-full flex items-center justify-center text-neutral-900 hover:bg-cyan-300 transition-colors"
-                    >
-                      <FaGithub className="text-xl" />
-                    </motion.a>
-                    <motion.a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-12 h-12 bg-teal-400 rounded-full flex items-center justify-center text-neutral-900 hover:bg-teal-300 transition-colors"
-                    >
-                      <FaExternalLinkAlt className="text-lg" />
-                    </motion.a>
+                    {/* Show External Link for first 3 projects, only GitHub for the rest */}
+                    {project.id <= 3 ? (
+                      <motion.a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-12 h-12 bg-teal-400 rounded-full flex items-center justify-center text-neutral-900 hover:bg-teal-300 transition-colors"
+                      >
+                        <FaExternalLinkAlt className="text-lg" />
+                      </motion.a>
+                    ) : (
+                      <motion.a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-12 h-12 bg-cyan-400 rounded-full flex items-center justify-center text-neutral-900 hover:bg-cyan-300 transition-colors"
+                      >
+                        <FaGithub className="text-xl" />
+                      </motion.a>
+                    )}
                   </motion.div>
 
                   {/* Category Badge */}
@@ -300,13 +354,16 @@ const Projects = () => {
                       <FaCode className="text-cyan-400" />
                       <span>Open Source</span>
                     </div>
-                    <motion.div
+                    <motion.a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ x: 5 }}
-                      className="text-cyan-400 text-xs font-medium flex items-center gap-1 cursor-pointer"
+                      className="text-cyan-400 text-xs font-medium flex items-center gap-1 cursor-pointer hover:text-teal-400 transition-colors"
                     >
                       View Details
                       <FaExternalLinkAlt className="text-[10px]" />
-                    </motion.div>
+                    </motion.a>
                   </div>
                 </div>
 

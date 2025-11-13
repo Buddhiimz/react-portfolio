@@ -5,13 +5,13 @@ import Profile from "../assets/Profile.jpg";
 
 const About = () => {
   return (
-    <div id="about-me" className="w-full px-4 sm:px-6 md:px-8 mt-24">
+    <div id="about-me" className="w-full px-4 sm:px-6 md:px-8 mt-28">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="text-center mb-8"
       >
         <motion.h1
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ const About = () => {
             </div>
 
             {/* Image container */}
-            <div className="relative w-full h-full p-3 z-10 lg:mt-16">
+            <div className="relative w-full h-full p-3 z-10 lg:mt-8">
               <img
                 src={Profile}
                 alt="Profile"
@@ -135,17 +135,6 @@ const About = () => {
             viewport={{ once: true }}
             className="bg-neutral-900/50 backdrop-blur-sm rounded-2xl p-6 border border-neutral-800 hover:border-cyan-400/30 transition-all duration-300"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-teal-400 rounded-lg flex items-center justify-center">
-                <FaGraduationCap className="text-2xl text-neutral-900" />
-              </div>
-              <h2
-                className="text-2xl font-bold text-white"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-              >
-                Education
-              </h2>
-            </div>
 
             <div className="space-y-6">
               {/* University */}
