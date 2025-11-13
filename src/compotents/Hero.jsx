@@ -204,15 +204,6 @@ const SequentialRoleDisplay = () => {
                   ))}
                 </h2>
 
-                {/* Cursor - only show when typing */}
-                {/* {isTyping && (
-                  <motion.span
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                    className="inline-block w-0.5 h-8 bg-gradient-to-b from-cyan-400 to-teal-400 ml-1"
-                  />
-                )} */}
-
                 {/* Scanline effect during glitch */}
                 {isGlitching && (
                   <motion.div
@@ -237,6 +228,48 @@ const SequentialRoleDisplay = () => {
         </div>
       </div>
     </div>
+  );
+};
+// Animated Stats Component
+const AnimatedStats = () => {
+  const stats = [
+    { label: "Projects", value: 10, suffix: "+" },
+    { label: "Technologies", value: 20, suffix: "+" },
+    { label: "Experience", value: 2, suffix: " Years" },
+  ];
+
+  return (
+    <motion.div
+      variants={container(0.4)}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-3 gap-4 my-8 max-w-2xl"
+    >
+      {stats.map((stat, index) => (
+        <motion.div
+          key={stat.label}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.6 + index * 0.1, type: "spring" }}
+          className="relative group"
+        >
+          <div className="text-center p-4 rounded-lg border border-cyan-400/30 bg-cyan-400/5 backdrop-blur-sm hover:border-cyan-400/60 transition-all duration-300">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 + index * 0.1 }}
+              className="text-3xl lg:text-4xl font-bold bg-gradient-to-r text-white from-cyan-400 to-teal-400 bg-clip-text text-transparent"
+            >
+              {stat.value}{stat.suffix}
+            </motion.div>
+            <div className="text-sm text-neutral-400 mt-2">{stat.label}</div>
+          </div>
+          
+          {/* Hover glow effect */}
+          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-teal-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10" />
+        </motion.div>
+      ))}
+    </motion.div>
   );
 };
 
@@ -278,14 +311,8 @@ const Hero = () => {
               <SequentialRoleDisplay />
             </motion.div>
 
-            <motion.p
-              variants={container(0.4)}
-              initial="hidden"
-              animate="visible"
-              className="my-2 py-4 text-base lg:text-m text-center lg:text-left"
-              style={{ marginTop: "-10px", maxWidth: "45rem" }} >
-              {HERO_CONTENT}
-            </motion.p>
+            {/* Animated Stats instead of content */}
+            <AnimatedStats />
 
             <motion.div
               variants={container(0.6)}
