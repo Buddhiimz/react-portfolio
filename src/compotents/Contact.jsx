@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Send, Phone, MapPin, Mail, Download } from "lucide-react";
-import { motion } from "framer-motion";
 
 // Mock constants - replace with your actual imports
 const CONTACT = {
@@ -9,7 +8,9 @@ const CONTACT = {
   email: "agbvilochana@gmail.com"
 };
 
-const BuddhimaCV = "/path-to-cv.pdf";
+// IMPORTANT: Place your CV in the public folder as /public/BuddhimaCV.pdf
+// Or replace this with a direct URL to your hosted CV
+const CV_URL = "/BuddhimaCV.pdf";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -39,7 +40,30 @@ const Contact = () => {
     }, 1500);
   };
 
-  const ContactInfo = ({ icon: Icon, title, value, href, download }) => (
+  const handleDownloadCV = () => {
+    try {
+      // Create a temporary anchor element
+      const link = document.createElement('a');
+      link.href = CV_URL;
+      link.download = 'Buddhima_Vilochana_CV.pdf';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Show success message
+      setStatus({ type: "success", message: "CV download started!" });
+      setTimeout(() => setStatus({ type: "", message: "" }), 3000);
+    } catch (error) {
+      console.error('Download error:', error);
+      setStatus({ type: "error", message: "Failed to download CV. Please try again." });
+    }
+  };
+
+  const ContactInfo = ({ icon: Icon, title, value, href, onClick }) => (
     <div className="flex items-center space-x-4">
       <div
         className={`p-3 ${
@@ -52,10 +76,16 @@ const Contact = () => {
             : "bg-teal-500/10"
         } rounded-lg border border-cyan-400/20`}
       >
-        {href ? (
+        {onClick ? (
+          <button
+            onClick={onClick}
+            className="hover:text-cyan-300 transition-colors focus:outline-none"
+          >
+            <Icon className="w-6 h-6 text-cyan-400 cursor-pointer" />
+          </button>
+        ) : href ? (
           <a
             href={href}
-            download={download}
             className="hover:text-cyan-300 transition-colors"
           >
             <Icon className="w-6 h-6 text-cyan-400 cursor-pointer" />
@@ -66,7 +96,16 @@ const Contact = () => {
       </div>
       <div>
         <h3 className="font-semibold text-white">{title}</h3>
-        <span className="opacity-80 text-neutral-400">{value}</span>
+        {onClick ? (
+          <button
+            onClick={onClick}
+            className="opacity-80 text-neutral-400 hover:text-cyan-400 transition-colors focus:outline-none"
+          >
+            {value}
+          </button>
+        ) : (
+          <span className="opacity-80 text-neutral-400">{value}</span>
+        )}
       </div>
     </div>
   );
@@ -94,29 +133,18 @@ const Contact = () => {
   );
 
   return (
-    <div className="min-h-min py-4 px-4 font-[Poppins] bg-neutral-950">
+    <div className="min-h-min py-4 px-4 font-sans bg-neutral-950">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-4 mb-4">
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-4"
-          >
-            <motion.h1
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: -50 }}
-              transition={{ duration: 1 }}
-              className="text-4xl lg:text-5xl font-bold text-white mb-4 text-center"
-            >
+          <div className="text-center mb-4">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4 text-center">
               Get{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">
                 In Touch
               </span>
-            </motion.h1>
+            </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
-          </motion.div>
+          </div>
 
           <p className="text-center max-w-2xl mx-auto text-neutral-400">
             Have a question or want to work together? Drop me a message below.
@@ -148,8 +176,7 @@ const Contact = () => {
                   icon={Download}
                   title="Resume"
                   value="Download CV"
-                  href={BuddhimaCV}
-                  download
+                  onClick={handleDownloadCV}
                 />
               </div>
             </div>
