@@ -21,12 +21,20 @@ const experiences = [
   },
   {
     id: 2,
-    role: "Contract - Web Developer",
+    role: "Contract - Full-Stack Web Developer",
     company: "illumin-labs",
     period: "Dec 2024 – Present",
     description:
       "As a Contract Web Developer, I design, develop, and maintain web applications, ensuring responsive and user-friendly interfaces. My work involves building and testing features, debugging issues, and optimizing performance for seamless functionality. I actively contribute to the full development cycle, from planning and design to deployment.",
   },
+  {
+    id: 3,
+    role: "Contract Web Developer (WordPress & Next.js)",
+    company: "CODEMAS Technologies",
+    period: "Nov 2025 – Present",
+    description:
+      "As a Contract WordPress and Next.js Developer, I develop and maintain custom WordPress themes and plugins while building modern, responsive web interfaces using Next.js. My responsibilities include website optimization, implementing front end and back end features, troubleshooting technical issues, and ensuring timely delivery of tasks. I contribute throughout the full development lifecycle, from planning and development to testing and deployment."
+  }
 ];
 
 const Particle = ({ delay }) => (
@@ -35,7 +43,7 @@ const Particle = ({ delay }) => (
     animate={{
       opacity: [0, 1, 0],
       scale: [0, 1, 0],
-      y: [0, -100], // Moves upward from bottom to top
+      y: [0, -100], 
     }}
     transition={{
       duration: 3,
@@ -46,7 +54,7 @@ const Particle = ({ delay }) => (
     className="absolute w-1 h-1 bg-cyan-400 rounded-full"
     style={{
       left: `${Math.random() * 100}%`,
-      bottom: 0, // Starts at bottom
+      bottom: 0, 
     }}
   />
 );

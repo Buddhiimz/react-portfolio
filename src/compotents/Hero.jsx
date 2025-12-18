@@ -235,7 +235,7 @@ const AnimatedStats = () => {
   const stats = [
     { label: "Projects", value: 10, suffix: "+" },
     { label: "Technologies", value: 20, suffix: "+" },
-    { label: "Experience", value: 2, suffix: " Years" },
+    { label: "Experience", value: 1, suffix: "+ Years" },
   ];
 
   return (

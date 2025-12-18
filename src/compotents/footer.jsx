@@ -75,7 +75,6 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, y: -3 }}
                   whileTap={{ scale: 0.9 }}
                   className={`w-10 h-10 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center ${social.color} hover:border-cyan-400/50 transition-all duration-300`}
                 >
@@ -91,6 +90,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="pl-0 sm:pl-0 md:pl-12 lg:pl-20"
           >
             <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
             <ul className="space-y-2">
@@ -161,7 +161,6 @@ const Footer = () => {
             </p>
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-block"
             >
