@@ -122,8 +122,11 @@ const About = () => {
               modern technologies such as ReactJS, NextJS, Angular, NodeJs,
               .NET, and PHP. I have professional experience as a Full Stack
               Developer at illumin-Labs and completed an internship at Nova Corp
-              (Pvt) Ltd. I’m eager to explore emerging technologies and deliver
-              innovative solutions.
+              (Pvt) Ltd. I also build my own products — most recently{" "}
+              <span className="text-cyan-400 font-semibold">ORBI</span>, an
+              interactive AI website companion that guides visitors around a
+              site and answers questions about the business. I’m eager to
+              explore emerging technologies and deliver innovative solutions.
             </p>
           </div>
 
@@ -149,19 +152,9 @@ const About = () => {
                 <p className="text-cyan-400 text-sm font-medium mb-1">
                   BSc (Hons) in Information Technology
                 </p>
-                <p className="text-neutral-300 text-sm mb-2">
+                <p className="text-neutral-300 text-sm">
                   Specializing in Software Engineering
                 </p>
-                <div className="flex flex-wrap gap-3 text-sm text-neutral-400">
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-                    Expected: Oct 2026
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-teal-400 rounded-full"></span>
-                    CGPA: 2.81
-                  </span>
-                </div>
               </div>
 
               {/* School */}

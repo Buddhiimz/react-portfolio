@@ -1,94 +1,84 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaExternalLinkAlt,
-  FaBriefcase,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
-import Fproject1 from "../assets/projects/FProject2.png";
-import Fproject2 from "../assets/projects/FProject1.png";
-import Fproject3 from "../assets/projects/FProject3.png";
+import { FaArrowUp, FaCheck } from "react-icons/fa";
 
-const experiences = [
+// Ordered oldest -> newest so the ladder climbs from left to right.
+const journey = [
   {
     id: 1,
-    role: "Software Engineer Intern",
-    company: "Nova Corp (Pvt) Ltd",
-    period: "Feb 2025 – Aug 2025",
-    description:
-      "As a Software Engineer Intern, I developed and debugged web applications using MERN and PHP, focusing on user interfaces and RESTful APIs. I performed unit testing, contributed to Agile sprints and code reviews, and assisted in debugging and deployment to ensure reliable delivery.",
+    step: "01",
+    company: "illumin-labs",
+    role: "Contract Full-Stack Web Developer",
+    period: "Dec 2024 – Nov 2025",
+    type: "Freelance",
+    initials: "IL",
+    stack: ["React", "Node.js", "MongoDB"],
+    milestone: "Started building real client products end to end.",
   },
   {
     id: 2,
-    role: "Contract - Full-Stack Web Developer",
-    company: "illumin-labs",
-    period: "Dec 2024 – Present",
-    description:
-      "As a Contract Web Developer, I design, develop, and maintain web applications, ensuring responsive and user-friendly interfaces. My work involves building and testing features, debugging issues, and optimizing performance for seamless functionality. I actively contribute to the full development cycle, from planning and design to deployment.",
+    step: "02",
+    company: "Nova Corp",
+    role: "Software Engineer Intern",
+    period: "Feb 2025 – Aug 2025",
+    type: "Internship",
+    initials: "NC",
+    stack: ["MERN", "PHP", "Agile"],
+    milestone: "Learned professional workflow — sprints, reviews, testing.",
   },
   {
     id: 3,
-    role: "Contract Web Developer (WordPress & Next.js)",
+    step: "03",
     company: "CODEMAS Technologies",
-    period: "Nov 2025 – Present",
-    description:
-      "As a Contract WordPress and Next.js Developer, I develop and maintain custom WordPress themes and plugins while building modern, responsive web interfaces using Next.js. My responsibilities include website optimization, implementing front end and back end features, troubleshooting technical issues, and ensuring timely delivery of tasks. I contribute throughout the full development lifecycle, from planning and development to testing and deployment."
-  }
+    role: "Contract Web Developer",
+    period: "Nov 2025 – Apr 2026",
+    type: "Contract",
+    initials: "CT",
+    stack: ["WordPress", "Next.js", "PHP"],
+    milestone: "Owned delivery of full client sites independently.",
+  },
+  {
+    id: 4,
+    step: "04",
+    company: "SAS Creative",
+    role: "Web Developer",
+    period: "Apr 2026 – Aug 2026",
+    type: "Full-time",
+    initials: "SC",
+    stack: ["React", "Next.js", "Tailwind"],
+    milestone: "Moved from contract work into a full-time in-house role.",
+  },
+  {
+    id: 5,
+    step: "05",
+    company: "SAS Creative",
+    role: "Associate Software Engineer",
+    period: "Aug 2026 – Present",
+    type: "Full-time",
+    initials: "SC",
+    stack: ["React", "Node.js", "TypeScript"],
+    milestone: "Promoted into engineering — shipping production features.",
+    current: true,
+    promoted: true,
+  },
 ];
 
-const Particle = ({ delay }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{
-      opacity: [0, 1, 0],
-      scale: [0, 1, 0],
-      y: [0, -100], 
-    }}
-    transition={{
-      duration: 3,
-      delay,
-      repeat: Infinity,
-      repeatDelay: 2,
-    }}
-    className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-    style={{
-      left: `${Math.random() * 100}%`,
-      bottom: 0, 
-    }}
-  />
-);
-
-const containerVariant = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-};
-
-const itemVariant = {
-  hidden: { y: 50, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
+const stats = [
+  { value: "5", label: "Roles" },
+  { value: "4", label: "Companies" },
+  { value: "1", label: "Promotion" },
+];
 
 const Experience = () => {
+  const [hovered, setHovered] = useState(null);
+
   return (
     <div
       id="experience"
-      className="relative px-4 sm:px-6 md:px-12 lg:px-28 pt-8 sm:pt-16 lg:pt-20 max-w-screen overflow-hidden mt-12"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-20 pt-8 sm:pt-16 lg:pt-20 max-w-screen overflow-hidden mt-12"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      {/* Work Experience Section */}
+      {/* ---------------- Heading ---------------- */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -117,62 +107,261 @@ const Experience = () => {
           </span>
         </motion.h1>
         <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
+
+        {/* Growth summary */}
+        <div className="mt-5 flex items-center justify-center gap-3 sm:gap-5">
+          {stats.map((s, i) => (
+            <React.Fragment key={s.label}>
+              {i > 0 && <span className="w-px h-6 bg-neutral-800"></span>}
+              <span className="flex items-baseline gap-1.5">
+                <span className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">
+                  {s.value}
+                </span>
+                <span className="text-[10px] sm:text-xs text-neutral-500 uppercase tracking-wider">
+                  {s.label}
+                </span>
+              </span>
+            </React.Fragment>
+          ))}
+        </div>
       </motion.div>
 
-      {/* Experience Cards */}
+      {/* ---------------- Growth ladder ---------------- */}
       <motion.div
-        variants={containerVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="space-y-6 sm:space-y-8 mb-12 sm:mb-12 lg:mb-16 max-w-5xl mx-auto"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-60px" }}
+        className="relative max-w-6xl mx-auto mb-12 lg:mb-16"
       >
-        {experiences.map((exp, index) => (
-          <motion.div key={exp.id} variants={itemVariant} className="relative">
-            {/* Timeline connector */}
-            {index !== 0 && (
-              <div className="absolute left-5 sm:left-6 lg:left-8 -top-6 sm:-top-8 w-0.5 h-6 sm:h-8 bg-gradient-to-b from-cyan-400/50 to-transparent"></div>
-            )}
+        {/* Ambient glow rising to the right */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-tr from-transparent via-cyan-500/[0.06] to-teal-400/[0.10] blur-2xl"></div>
 
-            {/* Experience Card */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-lg sm:rounded-xl opacity-30 group-hover:opacity-25 blur transition duration-300"></div>
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-xl opacity-0 group-hover:opacity-50 blur transition duration-500"></div>
+        {/* --- Growth axis label (desktop) --- */}
+        <div className="hidden lg:flex items-center gap-2 mb-4 text-[10px] uppercase tracking-[0.2em] text-neutral-600">
+          <FaArrowUp className="text-cyan-400/60 text-[9px]" />
+          Career growth
+          <span className="flex-1 h-px bg-gradient-to-r from-neutral-800 to-transparent"></span>
+        </div>
 
-              <div className="relative bg-neutral-900 rounded-lg sm:rounded-xl p-4 sm:p-6 lg:p-8 border border-neutral-800 hover:border-cyan-400/50 transition duration-300 overflow-hidden">
-                {/* Particles */}
-                {[...Array(5)].map((_, i) => (
-                  <Particle key={i} delay={i * 0.5} />
-                ))}
+        {/* ===================== DESKTOP: ascending steps ===================== */}
+        <div className="hidden lg:flex items-end gap-4 relative">
+          {/* Growth trajectory climbing behind the steps */}
+          <svg
+            className="pointer-events-none absolute inset-0 w-full h-full"
+            preserveAspectRatio="none"
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="growthLine" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#22d3ee" stopOpacity="0" />
+                <stop offset="55%" stopColor="#22d3ee" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0.7" />
+              </linearGradient>
+            </defs>
+            <line
+              x1="4"
+              y1="94"
+              x2="93"
+              y2="10"
+              stroke="url(#growthLine)"
+              strokeWidth="0.4"
+              strokeDasharray="2 2"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+          {journey.map((job, i) => {
+            const isActive = hovered === job.id || (hovered === null && job.current);
 
-                <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-400 to-teal-400 rounded-lg flex items-center justify-center">
-                    <FaBriefcase className="text-neutral-900 text-base sm:text-xl" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-1 break-words">
-                      {exp.role}
+            return (
+              <motion.div
+                key={job.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                onMouseEnter={() => setHovered(job.id)}
+                onMouseLeave={() => setHovered(null)}
+                className="flex-1 flex flex-col"
+                style={{ paddingBottom: `${i * 30}px` }}
+              >
+                {/* ---- Step card ---- */}
+                <div
+                  className={`relative rounded-xl p-[1px] transition-all duration-300 ${
+                    isActive
+                      ? "bg-gradient-to-br from-cyan-400 to-teal-400"
+                      : "bg-neutral-800"
+                  }`}
+                >
+                  <div
+                    className={`relative rounded-xl px-4 py-4 h-full transition-all duration-300 ${
+                      isActive ? "bg-neutral-900" : "bg-neutral-950"
+                    }`}
+                  >
+                    {/* Step number + badge */}
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span
+                        className={`text-[10px] font-bold tracking-widest transition-colors duration-300 ${
+                          isActive ? "text-cyan-400" : "text-neutral-700"
+                        }`}
+                      >
+                        {job.step}
+                      </span>
+                      {job.current ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 px-2 py-0.5 text-[9px] font-medium text-cyan-300">
+                          <span className="relative flex w-1.5 h-1.5">
+                            <span className="absolute inline-flex w-full h-full rounded-full bg-cyan-400 opacity-75 animate-ping"></span>
+                            <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                          </span>
+                          Now
+                        </span>
+                      ) : (
+                        <span className="text-[9px] text-neutral-600 uppercase tracking-wider">
+                          {job.type}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* COMPANY — the highlighted element */}
+                    <h3
+                      className={`text-base font-bold leading-tight mb-1 transition-all duration-300 ${
+                        isActive
+                          ? "text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-300"
+                          : "text-white"
+                      }`}
+                    >
+                      {job.company}
                     </h3>
-                    <p className="text-cyan-400 font-semibold text-sm sm:text-base lg:text-lg break-words">
-                      {exp.company}
+
+                    {/* Role */}
+                    <p className="text-[11px] leading-snug text-neutral-400 min-h-[28px]">
+                      {job.role}
                     </p>
-                    <p className="text-neutral-400 text-xs sm:text-sm mt-1 mb-2 sm:mb-3">
-                      {exp.period}
+
+                    {/* Period */}
+                    <p className="mt-2 text-[10px] text-neutral-600">
+                      {job.period}
                     </p>
-                    <p className="text-neutral-300 leading-relaxed text-xs sm:text-sm lg:text-base">
-                      {exp.description}
-                    </p>
+
+                    {/* Promotion marker */}
+                    {job.promoted && (
+                      <p className="mt-2.5 inline-flex items-center gap-1 rounded-md bg-teal-400/10 border border-teal-400/25 px-1.5 py-0.5 text-[9px] font-medium text-teal-300">
+                        <FaArrowUp className="text-[7px]" />
+                        Promoted
+                      </p>
+                    )}
+
+                    {/* Milestone — revealed on hover */}
+                    <div
+                      className={`grid transition-all duration-300 ${
+                        isActive
+                          ? "grid-rows-[1fr] opacity-100 mt-2.5"
+                          : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="flex gap-1.5 text-[10px] leading-relaxed text-neutral-400 border-t border-neutral-800 pt-2">
+                          <FaCheck className="mt-[3px] flex-shrink-0 text-[7px] text-cyan-400/70" />
+                          {job.milestone}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                {/* Bottom accent line */}
-                <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-neutral-800">
-                  <div className="h-1 w-full bg-gradient-to-r from-cyan-400/50 to-teal-400/50 rounded-full group-hover:from-cyan-400 group-hover:to-teal-400 transition-all duration-300"></div>
+
+                {/* ---- Riser: the leg that makes each step sit higher ---- */}
+                <div className="relative flex flex-col items-center mt-0">
+                  <div
+                    className={`w-px transition-colors duration-300 ${
+                      isActive
+                        ? "bg-gradient-to-b from-cyan-400 to-cyan-400/20"
+                        : "bg-gradient-to-b from-neutral-600 to-neutral-800/30"
+                    }`}
+                    style={{ height: `${i * 30 + 16}px` }}
+                  ></div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+              </motion.div>
+            );
+          })}
+
+          {/* Baseline the ladder stands on */}
+          <div className="absolute left-0 right-0 bottom-0 h-px bg-gradient-to-r from-neutral-800 via-neutral-700 to-cyan-400/40"></div>
+        </div>
+
+        {/* ===================== MOBILE / TABLET: climbing timeline ===================== */}
+        <div className="lg:hidden relative">
+          {/* Rail */}
+          <div className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-neutral-800 via-cyan-400/30 to-cyan-400/70"></div>
+
+          <div className="space-y-3">
+            {[...journey].reverse().map((job, i) => (
+              <motion.div
+                key={job.id}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="relative pl-10"
+              >
+                {/* Step node */}
+                <span
+                  className={`absolute left-0 top-3 w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-bold ring-4 ring-neutral-950 ${
+                    job.current
+                      ? "bg-gradient-to-br from-cyan-400 to-teal-400 text-neutral-900"
+                      : "bg-neutral-900 border border-neutral-800 text-neutral-500"
+                  }`}
+                >
+                  {job.step}
+                </span>
+
+                <div
+                  className={`rounded-xl border px-4 py-3 ${
+                    job.current
+                      ? "border-cyan-400/40 bg-neutral-900/80 shadow-[0_8px_30px_-16px_rgba(6,182,212,0.6)]"
+                      : "border-neutral-800 bg-neutral-900/40"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    {/* COMPANY — highlighted */}
+                    <h3
+                      className={`text-[15px] font-bold leading-tight ${
+                        job.current
+                          ? "text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-300"
+                          : "text-white"
+                      }`}
+                    >
+                      {job.company}
+                    </h3>
+
+                    {job.current ? (
+                      <span className="flex-shrink-0 inline-flex items-center gap-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 px-2 py-0.5 text-[9px] font-medium text-cyan-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                        Now
+                      </span>
+                    ) : (
+                      <span className="flex-shrink-0 text-[9px] text-neutral-600 uppercase tracking-wider mt-1">
+                        {job.type}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="mt-0.5 text-xs text-neutral-400">{job.role}</p>
+                  <p className="mt-1 text-[10px] text-neutral-600">
+                    {job.period}
+                  </p>
+
+                  {job.promoted && (
+                    <p className="mt-2 inline-flex items-center gap-1 rounded-md bg-teal-400/10 border border-teal-400/25 px-1.5 py-0.5 text-[9px] font-medium text-teal-300">
+                      <FaArrowUp className="text-[7px]" />
+                      Promoted
+                    </p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </motion.div>
     </div>
   );

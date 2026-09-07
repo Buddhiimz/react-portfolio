@@ -159,7 +159,7 @@ const Projects = ({ limit = null, showViewMore = false }) => {
                     animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
                     className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent flex items-center justify-center gap-4"
                   >
-                    {project.id <= 5 ? (
+                    {project.client || project.product ? (
                       <motion.a
                         href={project.link}
                         target="_blank"
@@ -217,7 +217,14 @@ const Projects = ({ limit = null, showViewMore = false }) => {
 
                   {/* Footer */}
                   <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
-                    {project.id <= 5 ? (
+                    {project.product ? (
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-400/40 bg-cyan-400/10">
+                        <FaCode className="text-cyan-400 text-sm" />
+                        <span className="text-cyan-300 text-xs font-semibold">
+                          My Product
+                        </span>
+                      </div>
+                    ) : project.client ? (
                       <div className="flex items-center gap-2 px-3 py-1.5  rounded-full border border-white/30">
                         <FaCode className="text-white text-sm" />
                         <span className="text-white text-xs font-semibold">

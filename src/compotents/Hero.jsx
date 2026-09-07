@@ -280,14 +280,24 @@ const Hero = () => {
   return (
     <div
       id="home"
-      className="relative px-4 lg:px-0 max-w-screen overflow-hidden"
+      className="hero-fullscreen relative flex items-center px-4 lg:px-0 max-w-screen overflow-hidden"
     >
-      <div
-        className="flex flex-col-reverse lg:flex-row flex-wrap"
-        style={{ marginTop: "150px" }}
-      >
+      <style>
+        {`
+          /* Fill the viewport (minus the fixed navbar) on every resolution */
+          .hero-fullscreen {
+            min-height: calc(100vh - 80px);
+          }
+          @supports (min-height: 100svh) {
+            .hero-fullscreen {
+              min-height: calc(100svh - 80px);
+            }
+          }
+        `}
+      </style>
+      <div className="w-full flex flex-col-reverse lg:flex-row flex-wrap items-center py-6 lg:py-10">
         {/* Content Section */}
-        <div className="w-full lg:w-3/5 mb-8 lg:mb-0">
+        <div className="w-full lg:w-3/5 mb-4 lg:mb-0">
           <div
             className="flex flex-col items-center lg:items-start lg:ml-28 "
             style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -421,19 +431,17 @@ const Hero = () => {
         </div>
 
         {/* Image Section */}
-        <div className="w-full lg:w-2/5 flex justify-center lg:justify-end mb-8 lg:mb-0 lg:p-8">
+        <div className="w-full lg:w-2/5 flex justify-center lg:justify-end mb-6 lg:mb-0 lg:p-8">
           <motion.img
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1.4, delay: 0 }}
             src={ProfilePic2}
             alt="Buddhima"
-            className="w-full max-w-sm lg:max-w-full rounded-lg"
+            className="w-full max-w-[15rem] sm:max-w-xs lg:max-w-full max-h-[30vh] lg:max-h-[70vh] object-contain rounded-lg"
             style={{
               marginRight: "0px",
-              marginTop: "-100px",
               borderRadius: "15px",
-              maxWidth: "110%",
             }}
           />
         </div>

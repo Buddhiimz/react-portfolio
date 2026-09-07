@@ -5,3 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Hide scrollbar for the horizontal experience rail on small screens */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
