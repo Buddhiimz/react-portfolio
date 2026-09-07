@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { HERO_CONTENT } from "../constants/index.js";
 import ProfilePic2 from "../assets/Profile2.png";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -34,6 +33,39 @@ const container = (delay) => ({
   hidden: { x: -200, opacity: 0 },
   visible: { x: 1, opacity: 1, transition: { duration: 0.5, delay: delay } },
 });
+
+const SOCIALS = [
+  {
+    href: "https://www.linkedin.com/in/buddhiimz",
+    Icon: FaLinkedin,
+    className:
+      "text-cyan-400 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]",
+  },
+  {
+    href: "https://github.com/Buddhiimz",
+    Icon: FaGithub,
+    className:
+      "text-neutral-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]",
+  },
+  {
+    href: "https://instagram.com/buddhimxx",
+    Icon: FaInstagram,
+    className:
+      "text-teal-400 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]",
+  },
+  {
+    href: "https://fb.com/ag buddhima",
+    Icon: FaFacebookSquare,
+    className:
+      "text-cyan-500 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]",
+  },
+  {
+    href: "#",
+    Icon: RiTwitterXFill,
+    className:
+      "text-neutral-400 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]",
+  },
+];
 
 const roles = [
   "I'm a Mobile Application Developer",
@@ -83,10 +115,7 @@ const SequentialRoleDisplay = () => {
   }, [charIndex, isTyping, isGlitching, currentRoleIndex]);
 
   return (
-    <div
-      className="relative h-20 flex items-center justify-center lg:justify-start"
-      style={{ marginTop: "-10px" }}
-    >
+    <div className="relative flex h-16 w-full items-center justify-center lg:justify-start">
       {/* Background scan lines */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         {[...Array(3)].map((_, i) => (
@@ -108,8 +137,8 @@ const SequentialRoleDisplay = () => {
         ))}
       </div>
 
-      <div className="relative flex flex-col items-center lg:items-start">
-        <div className="relative h-16 flex items-center min-w-[300px] lg:min-w-[400px]">
+      <div className="relative flex w-full flex-col items-center lg:items-start">
+        <div className="relative flex h-16 w-full items-center">
           <AnimatePresence mode="wait">
             {displayText && (
               <motion.div
@@ -123,7 +152,7 @@ const SequentialRoleDisplay = () => {
                 {isGlitching && (
                   <>
                     <motion.div
-                      className="absolute inset-0 text-3xl lg:text-4xl font-bold"
+                      className="absolute inset-0 text-2xl sm:text-3xl lg:text-4xl font-bold text-center lg:text-left"
                       style={{
                         color: "#22d3ee",
                         textShadow: "-3px 0 #0ea5e9",
@@ -140,7 +169,7 @@ const SequentialRoleDisplay = () => {
                       {displayText}
                     </motion.div>
                     <motion.div
-                      className="absolute inset-0 text-3xl lg:text-4xl font-bold"
+                      className="absolute inset-0 text-2xl sm:text-3xl lg:text-4xl font-bold text-center lg:text-left"
                       style={{
                         color: "#14b8a6",
                         textShadow: "3px 0 #06b6d4",
@@ -160,7 +189,7 @@ const SequentialRoleDisplay = () => {
                 )}
 
                 {/* Main text with letter-by-letter animation */}
-                <h2 className="relative text-3xl lg:text-4xl font-bold">
+                <h2 className="relative text-2xl sm:text-3xl lg:text-4xl font-bold text-center lg:text-left">
                   {displayText.split("").map((char, index) => (
                     <motion.span
                       key={`${currentRoleIndex}-${index}`}
@@ -243,7 +272,7 @@ const AnimatedStats = () => {
       variants={container(0.4)}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-3 gap-2 sm:gap-4 my-2 max-w-2xl w-full px-2 sm:px-4"
+      className="mt-6 grid w-full max-w-xl grid-cols-3 gap-3 sm:gap-4"
     >
       {stats.map((stat, index) => (
         <motion.div
@@ -278,9 +307,9 @@ const AnimatedStats = () => {
 
 const Hero = () => {
   return (
-    <div
+    <section
       id="home"
-      className="hero-fullscreen relative flex items-center px-4 lg:px-0 max-w-screen overflow-hidden"
+      className="hero-fullscreen relative flex items-center overflow-hidden"
     >
       <style>
         {`
@@ -293,20 +322,25 @@ const Hero = () => {
               min-height: calc(100svh - 80px);
             }
           }
+          @keyframes electric-flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
         `}
       </style>
-      <div className="w-full flex flex-col-reverse lg:flex-row flex-wrap items-center py-6 lg:py-10">
-        {/* Content Section */}
-        <div className="w-full lg:w-3/5 mb-4 lg:mb-0">
+
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 md:px-8 lg:py-0">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+          {/* Content Section */}
           <div
-            className="flex flex-col items-center lg:items-start lg:ml-28 "
+            className="order-2 flex flex-col items-center text-center lg:order-1 lg:col-span-7 lg:items-start lg:text-left"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             <motion.h1
               variants={container2}
               initial="hidden"
               animate="visible"
-              className="pb-4 text-5xl lg:text-6xl font-bold tracking-wide text-white text-center lg:text-left "
+              className="text-4xl font-bold tracking-wide text-white sm:text-5xl lg:text-6xl"
             >
               {name.split("").map((char, index) => (
                 <motion.span key={index} variants={letter} className="mr-0.5">
@@ -327,7 +361,7 @@ const Hero = () => {
               variants={container(0.2)}
               initial="hidden"
               animate="visible"
-              className="w-full "
+              className="mt-3 w-full"
             >
               <SequentialRoleDisplay />
             </motion.div>
@@ -335,19 +369,20 @@ const Hero = () => {
             {/* Animated Stats instead of content */}
             <AnimatedStats />
 
+            {/* Social Links */}
             <motion.div
               variants={container(0.6)}
               initial="hidden"
               animate="visible"
-              className="relative flex w-full lg:w-3/5 items-center justify-center gap-4 mt-6 lg:mt-8 lg:ml-10 rounded-lg p-4"
+              className="relative mt-6 flex w-full max-w-xl items-center justify-center gap-5 rounded-lg p-4 sm:gap-6 lg:justify-start lg:px-6"
               style={{
                 border: "2px solid rgba(6, 182, 212, 0.6)",
                 boxShadow:
                   "0 0 20px rgba(6, 182, 212, 0.3), inset 0 0 20px rgba(6, 182, 212, 0.1)",
               }}
             >
-              {/* Electric effect overlays */}
-              <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none ">
+              {/* Electric effect overlay */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg">
                 <div
                   className="absolute inset-0"
                   style={{
@@ -357,103 +392,38 @@ const Hero = () => {
                   }}
                 />
               </div>
-              <style>
-                {`
-                  @keyframes electric-flow {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
-                  }
-                `}
-              </style>
 
-              {/* Social Links */}
-              <a
-                href="https://www.linkedin.com/in/buddhiimz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative z-10"
-              >
-                <div className="relative">
-                  <FaLinkedin className="text-3xl lg:text-4xl text-cyan-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
-                </div>
-              </a>
-
-              <a
-                href="https://github.com/Buddhiimz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative z-10"
-              >
-                <div className="relative">
-                  <FaGithub className="text-3xl lg:text-4xl text-neutral-300 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
-                </div>
-              </a>
-
-              <a
-                href="https://instagram.com/buddhimxx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative z-10"
-              >
-                <div className="relative">
-                  <FaInstagram className="text-3xl lg:text-4xl text-teal-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-teal-300 group-hover:drop-shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
-                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
-                </div>
-              </a>
-
-              <a
-                href="https://fb.com/ag buddhima"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative z-10"
-              >
-                <div className="relative">
-                  <FaFacebookSquare className="text-3xl lg:text-4xl text-cyan-500 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
-                </div>
-              </a>
-
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative z-10"
-              >
-                <div className="relative">
-                  <RiTwitterXFill className="text-3xl lg:text-4xl text-neutral-400 transition-all duration-300 ease-in-out transform group-hover:scale-110 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                  <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 group-hover:w-full transition-all duration-300 rounded-full"></div>
-                </div>
-              </a>
+              {SOCIALS.map(({ href, Icon, className }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative z-10"
+                >
+                  <div className="relative">
+                    <Icon
+                      className={`text-2xl transition-all duration-300 ease-in-out transform group-hover:scale-110 sm:text-3xl lg:text-4xl ${className}`}
+                    />
+                    <div className="absolute -bottom-1 left-0 h-1 w-0 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  </div>
+                </a>
+              ))}
             </motion.div>
           </div>
-        </div>
 
-        {/* Image Section */}
-        <div className="w-full lg:w-2/5 flex justify-center lg:justify-end mb-6 lg:mb-0 lg:p-8">
-          <motion.img
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.4, delay: 0 }}
-            src={ProfilePic2}
-            alt="Buddhima"
-            className="w-full max-w-[15rem] sm:max-w-xs lg:max-w-full max-h-[30vh] lg:max-h-[70vh] object-contain rounded-lg"
-            style={{
-              marginRight: "0px",
-              borderRadius: "15px",
-            }}
-          />
+          {/* Image Section */}
+          <div className="order-1 flex justify-center lg:order-2 lg:col-span-5 lg:justify-end">
+            <motion.img
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1.4, delay: 0 }}
+              src={ProfilePic2}
+              alt="Buddhima"
+              className="w-full max-w-[13rem] rounded-2xl object-contain sm:max-w-xs lg:max-h-[68vh] lg:max-w-full"
+            />
+          </div>
         </div>
-        <style>
-          {`
-            @media (min-width: 1024px) {
-              img[alt="Buddhima"] {
-                margin-right: 110px !important;
-              }
-            }
-          `}
-        </style>
       </div>
 
       {/* Scroll Indicator */}
@@ -461,18 +431,18 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-neutral-500"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-neutral-500 lg:flex"
       >
         <span className="text-xs uppercase tracking-wider">Scroll Down</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-cyan-400/30 flex items-start justify-center p-2"
+          className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-cyan-400/30 p-2"
         >
-          <motion.div className="w-1 h-2 bg-cyan-400 rounded-full" />
+          <motion.div className="h-2 w-1 rounded-full bg-cyan-400" />
         </motion.div>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

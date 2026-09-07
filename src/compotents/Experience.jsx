@@ -63,12 +63,6 @@ const journey = [
   },
 ];
 
-const stats = [
-  { value: "5", label: "Roles" },
-  { value: "4", label: "Companies" },
-  { value: "1", label: "Promotion" },
-];
-
 const Experience = () => {
   const [hovered, setHovered] = useState(null);
 
@@ -84,7 +78,7 @@ const Experience = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-6 sm:mb-8 mt-8 sm:mt-0"
+        className="text-center mb-8 sm:mb-10 mt-8 sm:mt-0"
       >
         <motion.h1
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,23 +101,6 @@ const Experience = () => {
           </span>
         </motion.h1>
         <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-cyan-400 to-teal-400 mx-auto rounded-full"></div>
-
-        {/* Growth summary */}
-        <div className="mt-5 flex items-center justify-center gap-3 sm:gap-5">
-          {stats.map((s, i) => (
-            <React.Fragment key={s.label}>
-              {i > 0 && <span className="w-px h-6 bg-neutral-800"></span>}
-              <span className="flex items-baseline gap-1.5">
-                <span className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-400">
-                  {s.value}
-                </span>
-                <span className="text-[10px] sm:text-xs text-neutral-500 uppercase tracking-wider">
-                  {s.label}
-                </span>
-              </span>
-            </React.Fragment>
-          ))}
-        </div>
       </motion.div>
 
       {/* ---------------- Growth ladder ---------------- */}
@@ -223,20 +200,20 @@ const Experience = () => {
                       )}
                     </div>
 
-                    {/* COMPANY — the highlighted element */}
+                    {/* DESIGNATION — the highlighted element */}
                     <h3
-                      className={`text-base font-bold leading-tight mb-1 transition-all duration-300 ${
+                      className={`text-[15px] font-bold leading-snug mb-1.5 min-h-[38px] transition-all duration-300 ${
                         isActive
                           ? "text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-300"
                           : "text-white"
                       }`}
                     >
-                      {job.company}
+                      {job.role}
                     </h3>
 
-                    {/* Role */}
-                    <p className="text-[11px] leading-snug text-neutral-400 min-h-[28px]">
-                      {job.role}
+                    {/* Company */}
+                    <p className="text-[11px] font-medium leading-snug text-neutral-400">
+                      {job.company}
                     </p>
 
                     {/* Period */}
@@ -323,7 +300,7 @@ const Experience = () => {
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    {/* COMPANY — highlighted */}
+                    {/* DESIGNATION — highlighted */}
                     <h3
                       className={`text-[15px] font-bold leading-tight ${
                         job.current
@@ -331,7 +308,7 @@ const Experience = () => {
                           : "text-white"
                       }`}
                     >
-                      {job.company}
+                      {job.role}
                     </h3>
 
                     {job.current ? (
@@ -346,7 +323,9 @@ const Experience = () => {
                     )}
                   </div>
 
-                  <p className="mt-0.5 text-xs text-neutral-400">{job.role}</p>
+                  <p className="mt-0.5 text-xs font-medium text-neutral-400">
+                    {job.company}
+                  </p>
                   <p className="mt-1 text-[10px] text-neutral-600">
                     {job.period}
                   </p>
