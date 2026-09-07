@@ -33,7 +33,7 @@ export const PROJECTS = [
       "Google Gemini",
       "Web Audio API",
     ],
-    link: "/orbi",
+    link: "www.caliburlabz.com/orbi",
     category: "AI Product",
   },
   {
